@@ -5,11 +5,11 @@
 - [```var``` vs ```let``` vs ```const```](#var-vs-let-vs-const)
 - [```function``` vs ```class```](#function-vs-class)
 - [```export``` vs ```import```](#export-vs-import)
-- [箭头函数 Arrow Function](#箭头函数-Arrow-Function)
-- [解构赋值 Destructuring](#解构赋值-Destructuring)
+- [箭头函数 Arrow Function](#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0-Arrow-Function)
+- [解构赋值 Destructuring](#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC-Destructuring)
 - [```for..of```](#for..of)
-- [模板字符串 Template Literals](#模板字符串-Template-Literals)
-- [剩余和传播 Rest vs Spread](#剩余和传播-Rest-vs-Spread)
+- [模板字符串 Template Literals](#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2-Template-Literals)
+- [剩余和传播 Rest vs Spread](#%E5%89%A9%E4%BD%99%E5%92%8C%E4%BC%A0%E6%92%AD-Rest-vs-Spread)
 
 
 >### Babel
