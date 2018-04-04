@@ -5,11 +5,11 @@
 - [```var``` vs ```let``` vs ```const```](#var-vs-let-vs-const)
 - [```function``` vs ```class```](#function-vs-class)
 - [```export``` vs ```import```](#export-vs-import)
-- [箭头函数 Arrow Function](#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0-Arrow-Function)
-- [解构赋值 Destructuring](#%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC-Destructuring)
+- [Arrow Function](#Arrow-Function)
+- [Destructuring](#Destructuring)
 - [```for..of```](#for..of)
-- [模板字符串 Template Literals](#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2-Template-Literals)
-- [剩余和传播 Rest vs Spread](#%E5%89%A9%E4%BD%99%E5%92%8C%E4%BC%A0%E6%92%AD-Rest-vs-Spread)
+- [Template Literals](#Template-Literals)
+- [Rest vs Spread](#Rest-vs-Spread)
 
 
 >### Babel
@@ -203,7 +203,7 @@ if (condition) {
 <script type="module" src="./foo.js"></script>
 ```
 
->### 箭头函数 Arrow Function
+>### Arrow Function
 
 箭头函数比函数表达式更短，并且不绑定自己的```this```，```arguments```，```super```或```new.target```。箭头函数不能用作构造函数，适合用于非方法函数。
 
@@ -303,7 +303,7 @@ a() // 1
 a() // 2
 ```
 
->### 解构赋值 Destructuring
+>### Destructuring
 
 将『值』从『数组』
 ```javascript
@@ -426,7 +426,7 @@ for (let paragraph of articleParagraphs) {
 }
 ```
 
->### 模板字符串 Template Literals
+>### Template Literals
 ```javascript
 `string text ${expression} string text`
 ```
@@ -455,7 +455,7 @@ var output = myTag`that ${ person } is a ${ age }`
 console.log(output)    // that Mike is a young person
 ```
 
->### 剩余和传播 Rest vs Spread
+>### Rest vs Spread
 剩余：
 ```javascript
 function func(...theArgs) {
