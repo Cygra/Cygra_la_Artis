@@ -26,7 +26,7 @@ Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从
 
 ```
 
-### ```var``` vs ```let``` vs ```const```
+### var vs let vs const
 ```let```的用法类似于```var```，但是所声明的变量只在```let```命令所在的代码块内有效。
 
 ```javascript
@@ -84,7 +84,7 @@ a.length // 4
 a = 2 // Uncaught TypeError: Assignment to constant variable.
 ```
 
-### ```function``` vs ```class```
+### function vs class
 
 生成实例对象的传统方法是通过构造函数```funciton```。
 
@@ -147,7 +147,7 @@ class ColorPoint extends Point {
 
 使用```super```的时候，必须显式指定是作为函数还是对象使用，否则解析代码时会混淆```super```所代表的含义，报错。
 
-### ```export``` vs ```import```
+### export vs import
 ES6实现了模块功能，通过```export```命令输出代码，通过```import```命令输入代码，从而将一个大程序拆分成互相依赖的小文件。  
 > Ruby: ```require 'nokogiri'```  
 > Python: ```import module_1```  
@@ -383,7 +383,7 @@ for (var {name: n, family: { father: f } } of people) {
 ```
 提取到不同的变量中。
 
-### ```for..of```
+### for..of
 ```for..of```语句在可迭代对象（```Array```，```Map```，```Set```，```String```，```arguments对象```等）上创建一个迭代循环。
 
 ```javascript
