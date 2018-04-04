@@ -1,21 +1,16 @@
 # ES-Features
 
->整理自  
->https://developer.mozilla.org/  
->http://es6.ruanyifeng.com/  
->https://github.com/lukehoban/es6features  
->等
-
 包括如下内容:
 - [babel](#babel)
 - [```var``` vs ```let``` vs ```const```](#var-vs-let-vs-const)
 - [```function``` vs ```class```](#function-vs-class)
-- [```export``` & ```import```](#export-&-import)
-- [Arrow Function](#Arrow-Function)
-- [解构赋值](#解构赋值)
+- [```export``` vs ```import```](#export-vs-import)
+- [箭头函数 Arrow Function](#箭头函数-Arrow-Function)
+- [解构赋值 Destructuring](#解构赋值-Destructuring)
 - [```for..of```](#for..of)
-- [模板字符串](#模板字符串)
-- [```rest``` & ```spread```](#rest-&-spread)
+- [模板字符串 Template Literals](#模板字符串-Template-Literals)
+- [剩余和传播 Rest vs Spread](#剩余和传播-Rest-vs-Spread)
+
 
 >### Babel
 Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
@@ -26,7 +21,7 @@ Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从
 =>
 
 [1, 2, 3].map(function (n) {
-  return n + 1
+  console.log(n + 1)
 })
 
 ```
@@ -35,7 +30,7 @@ Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从
 ```let```的用法类似于```var```，但是所声明的变量只在```let```命令所在的代码块内有效。
 
 ```javascript
-for (let i = 0; i < 10; i++) {
+for (let i = 0 i < 10 i++) {
   ...
 }
 ```
@@ -51,10 +46,10 @@ let bar = 2
 存在```let```的块级作用域，它所声明的变量不再受外部的影响，亦即暂时性死区。
 
 ```javascript
-var  = 123
+var tmp = 123
 
 if (true) {
-  foo = 'bar' // ReferenceError
+  tmp = 'abc' // ReferenceError
   let tmp
 }
 ```
@@ -64,27 +59,28 @@ if (true) {
 function func() {
   let a = 10
   var a = 1
-}//undefined
+} // undefined
 
 function func() {
   let a = 10
   let a = 1
-}//undefined
+} // undefined
 ```
 
 ```const```声明一个只读的常量。一旦声明就不能修改。因为不得修改，所以必须立即初始化。
 
 ```javascript
 const a = 1
-a = 2 //Uncaught TypeError: Assignment to constant variable.
+a = 2 // Uncaught TypeError: Assignment to constant variable.
 
-const b //Uncaught SyntaxError: Missing initializer in const declaration
+const b // Uncaught SyntaxError: Missing initializer in const declaration
 ```
 ```const```存在暂时性死区，不允许重复声明。
 ```javascript
 const a = [1,2,3]
 a.push(4)
 a // [1, 2, 3, 4]
+a.length // 4
 a = 2 // Uncaught TypeError: Assignment to constant variable.
 ```
 
@@ -131,7 +127,7 @@ class ColorPoint extends Point {
   }
   
   toString() {
-    return this.color + ' ' + super.toString(); // 调用父类的toString()
+    return this.color + ' ' + super.toString() // 调用父类的toString()
   }
   
   bar() {
@@ -151,7 +147,7 @@ class ColorPoint extends Point {
 
 使用```super```的时候，必须显式指定是作为函数还是对象使用，否则解析代码时会混淆```super```所代表的含义，报错。
 
->### ```export``` & ```import```
+>### ```export``` vs ```import```
 ES6实现了模块功能，通过```export```命令输出代码，通过```import```命令输入代码，从而将一个大程序拆分成互相依赖的小文件。  
 > Ruby: ```require 'nokogiri'```  
 > Python: ```import module_1```  
@@ -207,17 +203,17 @@ if (condition) {
 <script type="module" src="./foo.js"></script>
 ```
 
->### Arrow Function
+>### 箭头函数 Arrow Function
 
 箭头函数比函数表达式更短，并且不绑定自己的```this```，```arguments```，```super```或```new.target```。箭头函数不能用作构造函数，适合用于非方法函数。
 
 基本语法：
 
 ```javascript
-//有参数的函数
+// 有参数的函数
 let f = (参数1, 参数2, .., 参数n) => { 函数声明 }
 
-//没有参数的函数写成一对圆括号
+// 没有参数的函数写成一对圆括号
 let f = () => { 函数声明 }
 ```
 
@@ -233,16 +229,16 @@ var materials = [
 
 //ES5
 materials.map(function(material) { 
-  return material.length
+  console.log(material.length)
 }) // [8, 6, 7, 9]
 
 
 //Arrow Function
 materials.map((material) => {
-  return material.length
+  console.log(material.length)
 }) // [8, 6, 7, 9]
 
-//Arrow Function
+// Arrow Function
 materials.map(material => material.length)
 ```
 箭头函数不会创建自己的```this```，而是使用封闭执行上下文的```this```。
@@ -303,60 +299,58 @@ promise.then(a => {
 var Add = (i=0) => { () => (++i) }
 var a = Add()
 
-a() //1
-a() //2
+a() // 1
+a() // 2
 ```
 
->### 解构赋值
+>### 解构赋值 Destructuring
 
-将 
-『值』从『数组』
-
+将『值』从『数组』
 ```javascript
-var a, b;
+var a, b
 
-[a, b] = [1, 2];
-console.log(a); // 1
-console.log(b); // 2
+[a, b] = [1, 2]
+console.log(a) // 1
+console.log(b) // 2
 ```
 ```javascript
 function f() {
-  return [1, 2, 3];
+  return [1, 2, 3]
 }
 
-var [a, , b] = f();
-console.log(a); // 1
-console.log(b); // 3
+var [a, , b] = f()
+console.log(a) // 1
+console.log(b) // 3
 ```
 ```javascript
-var [a, ...b] = [1, 2, 3];
-console.log(a); // 1
-console.log(b); // [2, 3]
+var [a, ...b] = [1, 2, 3]
+console.log(a) // 1
+console.log(b) // [2, 3]
 ```
- 或 『属性』从『对象』
+或 『属性』从『对象』
 ```javascript
-var o = {p: 42, q: true};
-var {p: foo, q: bar} = o;
+var o = {p: 42, q: true}
+var {p: foo, q: bar} = o
  
-console.log(foo); // 42 
-console.log(bar); // true
+console.log(foo) // 42 
+console.log(bar) // true
 ```
 ```javascript
-var {a = 10, b = 5} = {a: 3};
+var {a = 10, b = 5} = {a: 3}
 
-console.log(a); // 3
-console.log(b); // 5
+console.log(a) // 3
+console.log(b) // 5
 ```
 ```javascript
-function drawES2015Chart({size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {}) 
+function Chart({size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {}) 
 {
-  console.log(size, cords, radius);
+  console.log(size, cords, radius)
 }
 
-drawES2015Chart({
+Chart({
   cords: { x: 18, y: 30 },
   radius: 30
-});
+})
 ```
 ```javascript
 var people = [
@@ -378,10 +372,10 @@ var people = [
     },
     age: 25
   }
-];
+]
 
 for (var {name: n, family: { father: f } } of people) {
-  console.log("Name: " + n + ", Father: " + f);
+  console.log("Name: " + n + ", Father: " + f)
 }
 
 // "Name: Mike Smith, Father: Harry Smith"
@@ -393,20 +387,20 @@ for (var {name: n, family: { father: f } } of people) {
 ```for..of```语句在可迭代对象（```Array```，```Map```，```Set```，```String```，```arguments对象```等）上创建一个迭代循环。
 
 ```javascript
-let iterable = [1, 2, 3];
+let iterable = [1, 2, 3]
 
 for (const value of iterable) {
-    console.log(value);
+    console.log(value)
 }
 // 1
 // 2
 // 3
 ```
 ```javascript
-let iterable = "boo";
+let iterable = "boo"
 
 for (let value of iterable) {
-  console.log(value);
+  console.log(value)
 }
 // "b"
 // "o"
@@ -415,9 +409,9 @@ for (let value of iterable) {
 ```javascript
 (function() {
   for (let argument of arguments) {
-    console.log(argument);
+    console.log(argument)
   }
-})(1, 2, 3);
+})(1, 2, 3)
 
 // 1
 // 2
@@ -425,77 +419,91 @@ for (let value of iterable) {
 ```
 ```javascript
 //迭代DOM集合
-let articleParagraphs = document.querySelectorAll("article > p");
+let articleParagraphs = document.querySelectorAll("article > p")
 
 for (let paragraph of articleParagraphs) {
-  paragraph.classList.add("read");
-}
-```
-```javascript
-//迭代生成器
-function* fibonacci() {
-    let [prev, curr] = [0, 1];
-    for (;;) {
-        [prev, curr] = [curr, prev + curr];//解构
-        yield curr;
-    }
-}
- 
-for (let n of fibonacci()) {
-     console.log(n); 
-    if (n >= 1000)
-        break;
+  paragraph.classList.add("read")
 }
 ```
 
->### 模板字符串
+>### 模板字符串 Template Literals
 ```javascript
 `string text ${expression} string text`
 ```
 ```javascript
-var person = 'Mike';
-var age = 28;
+var person = 'Mike'
+var age = 28
 
 function myTag(strings, personExp, ageExp) {
 
-  var str0 = strings[0];
-  var str1 = strings[1];
+  var str0 = strings[0]
+  var str1 = strings[1]
 
-  var ageStr;
+  var ageStr
   if (ageExp > 60){
-    ageStr = 'old person';
+    ageStr = 'old person'
   } else {
-    ageStr = 'young person';
+    ageStr = 'young person'
   }
 
-  return str0 + personExp + str1 + ageStr;
+  return str0 + personExp + str1 + ageStr
 
 }
 
-var output = myTag`that ${ person } is a ${ age }`;
+var output = myTag`that ${ person } is a ${ age }`
 
-console.log(output);    // that Mike is a young person
+console.log(output)    // that Mike is a young person
 ```
 
->### ```rest``` & ```spread```
+>### 剩余和传播 Rest vs Spread
+剩余：
 ```javascript
-function f(x, y=12) {
-  // y is 12 if not passed (or passed as undefined)
-  return x + y;
+function func(...theArgs) {
+  console.log(theArgs.length)
 }
-f(3) == 15
+
+func(5, 6, 7) // 3
 ```
 ```javascript
-function f(x, ...y) {
-  // y is an Array
-  return x * y.length;
+function f(z, ...[a,b,c]) {
+    console.log(a + b + c)
 }
-f(3, "hello", true) == 6
+undefined
+f(1, 2, 3, 4) // 9
+// z对应第一个参数
 ```
 ```javascript
-function f(x, y, z) {
-  return x + y + z;
+function f(...[a, b, c]) {
+  console.log(a + b + c)
 }
-// Pass each elem of array as argument
-f(...[1,2,3]) == 6
+
+f(1, 2, 3)    // 6
+f(1)          // NaN 
+//b、c尚未定义
+f(1, 2, 3, 4) // 6 
+// 4未被解构
+```
+传播：
+```javascript
+// 传递参数
+function sum(x, y, z) {
+  console.log(x + y + z)
+}
+
+sum(...[1, 2, 3]) // 6
+```
+```javascript
+// 用于数组
+var arr = [1, 2, 3]
+var arr2 = [...arr]
+arr2.push(4) 
+arr2 // [1, 2, 3, 4]
+```
+```javascript
+// 用于对象
+var obj1 = { foo: 'bar', x: 42 }
+var obj2 = { foo: 'baz', y: 13 }
+
+var mergedObj = { ...obj1, ...obj2 }
+// { foo: "baz", x: 42, y: 13 }
 ```
