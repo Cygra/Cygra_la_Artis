@@ -8,12 +8,14 @@
 
 包括如下内容:
 - [babel](#babel)
-- [var+let+const](#varvsletvsconst)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
+- [```var``` vs ```let``` vs ```const```](#```var```-vs-```let```-vs-```const```)
+- [```function``` vs ```class```](#```function```-vs-```class```)
+- [```export``` & ```import```](#```export```-&-```import```)
+- [Arrow Function](#Arrow-Function)
+- [解构赋值](#解构赋值)
+- [```for..of```](#```for..of```)
+- [模板字符串](#模板字符串)
+- [```rest``` & ```spread```](#```rest```-&-```spread```)
 
 >### Babel
 Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
