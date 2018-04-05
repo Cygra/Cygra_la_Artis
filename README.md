@@ -1,18 +1,23 @@
-# ES-Features
+# Cygra's Note
 
 包括如下内容:
-- [Babel](#babel)
-- [```var``` vs ```let``` vs ```const```](#var-vs-let-vs-const)
-- [```function``` vs ```class```](#function-vs-class)
-- [```export``` vs ```import```](#export-vs-import)
-- [Arrow Function](#arrow-function)
-- [Destructuring](#destructuring)
-- [```for..of```](#for..of)
-- [Template Literals](#template-literals)
-- [Rest vs Spread](#rest-vs-spread)
 
----
+- [ES Features](#ES-Features)
+  - [Babel](#babel)
+  - [```var``` vs ```let``` vs ```const```](#var-vs-let-vs-const)
+  - [```function``` vs ```class```](#function-vs-class)
+  - [```export``` vs ```import```](#export-vs-import)
+  - [Arrow Function](#arrow-function)
+  - [Destructuring](#destructuring)
+  - [```for..of```](#for..of)
+  - [Template Literals](#template-literals)
+  - [Rest vs Spread](#rest-vs-spread)
+
+## ES Features
+
 >### Babel
+---
+
 Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
 
 ```javascript
@@ -26,8 +31,12 @@ Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从
 
 ```
 
----
 >### ```var``` vs ```let``` vs ```const```
+---
+
+讲个笑话：
+> [stop telling us "let is the new var"](#https://github.com/lukehoban/es6features/issues/117)
+
 ```let```的用法类似于```var```，但是所声明的变量只在```let```命令所在的代码块内有效。
 
 ```javascript
@@ -85,8 +94,8 @@ a.length // 4
 a = 2 // Uncaught TypeError: Assignment to constant variable.
 ```
 
----
 >### ```function``` vs ```class```
+---
 
 生成实例对象的传统方法是通过构造函数```funciton```。
 
@@ -149,8 +158,10 @@ class ColorPoint extends Point {
 
 使用```super```的时候，必须显式指定是作为函数还是对象使用，否则解析代码时会混淆```super```所代表的含义，报错。
 
----
+
 >### ```export``` vs ```import```
+---
+
 ES6实现了模块功能，通过```export```命令输出代码，通过```import```命令输入代码，从而将一个大程序拆分成互相依赖的小文件。  
 > Ruby: ```require 'nokogiri'```  
 > Python: ```import module_1```  
@@ -206,8 +217,8 @@ if (condition) {
 <script type="module" src="./foo.js"></script>
 ```
 
----
 >### Arrow Function
+---
 
 箭头函数比函数表达式更短，并且不绑定自己的```this```，```arguments```，```super```或```new.target```。箭头函数不能用作构造函数，适合用于非方法函数。
 
@@ -307,8 +318,8 @@ a() // 1
 a() // 2
 ```
 
----
 >### Destructuring
+---
 
 将『值』从『数组』
 ```javascript
@@ -388,8 +399,9 @@ for (var {name: n, family: { father: f } } of people) {
 ```
 提取到不同的变量中。
 
----
 >### ```for..of```
+---
+
 ```for..of```语句在可迭代对象（```Array```，```Map```，```Set```，```String```，```arguments对象```等）上创建一个迭代循环。
 
 ```javascript
@@ -432,8 +444,9 @@ for (let paragraph of articleParagraphs) {
 }
 ```
 
----
 >### Template Literals
+---
+
 ```javascript
 `string text ${expression} string text`
 ```
@@ -462,34 +475,42 @@ var output = myTag`that ${ person } is a ${ age }`
 console.log(output)    // that Mike is a young person
 ```
 
----
 >### Rest vs Spread
+---
+
+默认模式：
+```javascript
+function f(x, y=1) {
+  console.log(x + y);
+}
+f(2)  // 3
+```
 剩余：
 ```javascript
-function func(...theArgs) {
-  console.log(theArgs.length)
+function func(...A) {
+  console.log(A)
+  console.log(A.length)
+  console.log(typeof(A))
 }
 
-func(5, 6, 7) // 3
+func(1, 2, 3)
+// [1, 2, 3]
+// 3
+// object
 ```
 ```javascript
-function f(z, ...[a,b,c]) {
-    console.log(a + b + c)
-}
-undefined
-f(1, 2, 3, 4) // 9
-// z对应第一个参数
-```
-```javascript
-function f(...[a, b, c]) {
+function func(z, ...[a, b, c]) {
   console.log(a + b + c)
 }
 
-f(1, 2, 3)    // 6
-f(1)          // NaN 
-//b、c尚未定义
-f(1, 2, 3, 4) // 6 
-// 4未被解构
+func(1)          // NaN 
+// b、c尚未定义
+
+func(1, 2, 3, 4) // 9
+// z对应第一个参数1
+
+func(1, 2, 3, 4, 5) // 9
+// 5未被解构
 ```
 传播：
 ```javascript
@@ -498,20 +519,25 @@ function sum(x, y, z) {
   console.log(x + y + z)
 }
 
+sum(...[1]) // NaN
+// y、z尚未定义
+
 sum(...[1, 2, 3]) // 6
+
+sum(1, ...[1, 2, 3]) // 4
+// 3未被解构
 ```
 ```javascript
 // 用于数组
 var arr = [1, 2, 3]
 var arr2 = [...arr]
-arr2.push(4) 
+arr2.push(4)
 arr2 // [1, 2, 3, 4]
 ```
 ```javascript
 // 用于对象
 var obj1 = { foo: 'bar', x: 42 }
 var obj2 = { foo: 'baz', y: 13 }
-
 var mergedObj = { ...obj1, ...obj2 }
 // { foo: "baz", x: 42, y: 13 }
 ```
