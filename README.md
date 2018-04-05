@@ -2,7 +2,7 @@
 
 包括如下内容:
 
-- [ES Features](#ES-Features)
+- [ES Features](#es-features)
   - [Babel](#babel)
   - [```var``` vs ```let``` vs ```const```](#var-vs-let-vs-const)
   - [```function``` vs ```class```](#function-vs-class)
@@ -12,8 +12,15 @@
   - [```for..of```](#for..of)
   - [Template Literals](#template-literals)
   - [Rest vs Spread](#rest-vs-spread)
+- [React](#react)
+  - [State & Lifecycle](#state-and-lifecycle)
+    - [State](#state)
+    - [Lifecycle](#lifecycle)
+    - [Scene](#scene)
+  - [Redux](#redux)
+    - [Immutable Update Patterns](#immutable-update-patterns)
 
-## ES Features
+# ES Features
 
 >### Babel
 ---
@@ -541,3 +548,278 @@ var obj2 = { foo: 'baz', y: 13 }
 var mergedObj = { ...obj1, ...obj2 }
 // { foo: "baz", x: 42, y: 13 }
 ```
+
+# React
+
+## State and Lifecycle
+
+>### State
+---
+
+The constructor is the only place we can use ```this.state``` to initialize the state of a component.
+
+We can then use ```this.setState``` to update the state.
+
+When we call ```this.setState```, React merges the object we provide into the current state, which means that the state can be updated partially.
+
+State updates may be asynchronous, so as to update the state we can use a function ```(prevState, props) => ({...})``` which receives two arguments, the previous state as the first argument, and the props at the time the update is applied as the second.
+ 
+>### Lifecycle
+---
+
+Adding lifecycle methods to a class makes it possible to apply or free up resources taken by the components when they are rendered or destroyed. The two are called  **mounting** and  **unmounting** respectively in React.
+
+We can declare special methods on the component class to run some code when a component mounts and unmounts. These methods are called **lifecycle hooks**.
+
+The ```componentDidMount()``` hook runs some code after the component output has been rendered to the DOM. The code can be a timer based on ```setTimeout()``` ```setInterval()``` or a AJAX request for example.
+
+When the component is removed from the DOM, React calls the ```componentWillUnmount()``` lifecycle hook so the code mentioned is stopped.
+
+The whole procedure can be illustrated as:
+
+1. When ```<Compo />``` is passed to ```ReactDOM.render()```, React calls the constructor of the component. React initializes this.state with an object. We can later update this state.
+2. React then calls the component’s ```render()``` method. React then updates the DOM to match the component’s render output.
+3. When the component has been rendered in the DOM, React calls the ```componentDidMount()``` lifecycle hook. Inside it, the component asks the browser to run some code.
+4. We can use ```this.setState``` to let React know that the state has been updated. React then calls ```render()``` method again to update the DOM.
+5. If the Compo component will be removed from DOM, React calls ```componentWillUnmount()``` lifecycle hook so the text changes. 
+
+```javascript
+class Compo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'React'
+    }
+  }
+
+  componentDidMount() {
+    this.timer = setTimeout(
+      () => this.setState({
+        value: 'five seconds later'
+    }), 5000)
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      value: 'React'
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.value}.</h2>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Compo />,
+  document.getElementById('root')
+);
+```
+In addition to the two hooks mentioned, the component lifecycle also have some other methods to run code at particular times in the process.  
+
+Methods with ```-will-``` are called right **before** something happens.  
+Methods with ```-did-``` are called right **after** something happens.
+
+- Mounting  
+When a component is being created and inserted into the DOM:
+
+	- ```constructor()```is called ** before the component is mounted**. The constructor is the right place to initialize state.
+	- ```componentWillMount()```is called right before mount.
+	- ```render()```is always required. It requires ```this.props``` and ```this.state``` and return React Element(JSX) or String and Number or Portals or ```null``` or Booleans.
+	- ```componentDidMount()```is called right after mount.
+
+- Updating  
+When a component is being re-rendered:
+
+	- ```componentWillReceiveProps(nextProps)```is called before a mounted component receives new props.
+	- ```shouldComponentUpdate(nextProps, nextState)```is to let React know if a component’s output is not affected by the current change in state or props. If ```shouldComponentUpdate()``` returns false, then ```componentWillUpdate()```, ```render()```, and ```componentDidUpdate()``` will not be invoked.
+	- ```componentWillUpdate(nextProps, nextState)```is invoked just before rendering when new props or state are being received. It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
+	- ```render()```  
+	- ```componentDidUpdate()``` is invoked immediately after updating occurs (except the initial render). It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
+
+- Unmounting  
+When a component is being removed from the DOM:
+
+	- ```componentWillUnmount()```is called right before a component is unmounted and destroyed to perform any necessary cleanup such as invalidating a timer.
+
+- Error Handling  
+When there is an error during rendering, in a lifecycle method, or in the constructor of any child component:
+
+	- ```componentDidCatch(error, info)```catches JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed.
+
+>### Scene
+---
+
+- Set auto-focus for ```<Input />```:
+
+```javascript
+<Input autoFocus={true} />
+```
+
+```javascript
+export default class Input extends Component {
+  .
+  .
+
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      this.textInput.focus()
+      this.textInput.select()
+    }
+  }
+  
+  .
+  .
+  
+}
+  
+```
+
+- Set src for ```<Cropper />```：  
+
+```javascript
+class CompanyLogoCropper extends Component {
+
+  state = {
+    src: null,
+    submitting: false,
+  }
+
+  componentWillMount() {
+    const fileReader = new FileReader()
+    fileReader.onload = (e) => {
+      const dataURL = e.target.result
+      this.setState({src: dataURL})
+    }
+    
+  .
+  .
+  
+  render(){
+    return (
+    .
+    .
+	   <Cropper
+	     src={this.state.src}
+	     .
+	     .
+	   />
+    .
+    .
+  }
+}
+    
+    
+```
+- Update props: 
+ 
+```javascript
+componentWillReceiveProps(nextProps) {
+	// 更新后重新初始化以及重新求值
+  .
+  .
+}
+```
+- Remove "title" attribute of a list:
+
+```javascript
+export default class BumenTreeSelect extends Component {
+  .
+  .
+  componentDidUpdate() {
+    $(".ant-select li").removeAttr("title")
+  }
+  .
+  .
+}
+```
+- Remove event listener of a component:
+
+```javascript
+class HeadlinesPicker extends Component {
+  .
+  .
+  componentWillUnmount() {
+    window.removeEventListener('click', this.onWindowClick)
+  }
+  .
+  .
+}
+```
+- Stop the ```setInterval``` timer:
+
+```javascript
+class NotificationIcon extends Component {
+  .
+  .
+  // 轮询服务器 拿到通知中心的数据
+  componentDidMount() {
+    let that = this
+    if ( environment === 'development' ) {
+      console.warn("开发环境，消息轮询已关闭")
+    } else {
+      this.interval = setInterval(function() {
+        that.props.getNotificationInfo()
+      }, 30000)
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+  .
+  .
+}
+```
+
+## Redux
+
+>### Immutable Update Patterns
+---
+
+先来看一段代码：
+```javascript
+var x = 12
+var y = 12
+
+var object = { x: 1, y: 2 }
+var object2 = { x: 1, y: 2 }
+
+object == object2 // false
+object === object2 // false
+```
+
+可以看出，object和object2的值相同。但是此二者在程序中却不相等。
+
+浅比较（也被称为引用相等）只检查两个不同变量是否为同一对象的引用；与之相反，深比较（也被称为原值相等）必须检查两个对象所有属性的值是否相等。
+
+所以，浅比较就是简单（且快速）的a === b，而深比较需要以递归的方式遍历两个对象的所有属性，在每一个循环中对比各个属性的值。
+
+因为性能考虑，Redux 使用浅比较。
+
+浅比较不适用于可变对象：
+```javascript
+function mutateObj(obj) {
+  obj.key = 'newValue'
+  return obj
+}
+
+const param = { key: 'originalValue' }
+const returnVal = mutateObj(param)
+
+param === returnVal
+// true
+```
+```param```与```returnValue```的浅比较只是检查了这两个对象是否为相同对象的引用，而这在这段代码中总为真。虽然```mutateObj()```也许改变了```obj```的```key```属性，但它仍是传入的对象的引用。浅比较根本无法判断```mutateObj()```改变了它的值。
+
+故此，在React-Redux中我们要使用不可变对象。
+
+也就是说，总是去返回一个新的更新后的对象，而不是直接去修改原始的state tree。
+
+如果某个Redux的reducer直接修改并返回了传给它的state对象，根state对象的值的确会改变，但这个对象自身的引用没有变化。React-Redux是通过对根state对象进行浅比较来决定是否要重新渲染包装的组件的。它不会检测到state的变化，也就不会触发重新渲染。
+
