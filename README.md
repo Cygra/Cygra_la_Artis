@@ -43,7 +43,7 @@
 ---
 
 讲个笑话：
-> [stop telling us "let is the new var"](#https://github.com/lukehoban/es6features/issues/117)
+> [stop telling us "let is the new var"](https://github.com/lukehoban/es6features/issues/117)
 
 ```let```的用法类似于```var```，但是所声明的变量只在```let```命令所在的代码块内有效。
 
