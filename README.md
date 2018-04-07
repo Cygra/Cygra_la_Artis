@@ -26,7 +26,7 @@
 >### Babel
 ---
 
-[Babel](#https://babeljs.io/)是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
+[Babel](https://babeljs.io/)是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
 
 ```javascript
 [1, 2, 3].map(n => n ** 2)
@@ -863,7 +863,7 @@ function updateVeryNestedField(state, action) {
     }
 }
 ```
-因此要尽可能保持状态扁平（flattened），并且尽可能多地构建[reducer](#https://redux.js.org/basics/reducers)。
+因此要尽可能保持状态扁平（flattened），并且尽可能多地构建[reducer](https://redux.js.org/basics/reducers)。
 
 - #### 在数组中插入和删除数据
 避免使用```push```，```unshift```，```shift```，从而避免在reducer 中直接修改状态。“插入”和“删除”的行为如下所示：
