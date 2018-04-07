@@ -18,6 +18,7 @@
     - [Lifecycle](#lifecycle)
     - [Scene](#scene)
   - [Redux](#redux)
+    - [Object Spread Operator](#object-spread-operator)
     - [Immutable Update Patterns](#immutable-update-patterns)
 
 # ES Features
@@ -25,7 +26,7 @@
 >### Babel
 ---
 
-Babel是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
+[Babel](#https://babeljs.io/)是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
 
 ```javascript
 [1, 2, 3].map(n => n ** 2)
@@ -341,7 +342,7 @@ function f() {
   return [1, 2, 3]
 }
 
-var [a, , b] = f()
+var [a, ,b] = f()
 console.log(a) // 1
 console.log(b) // 3
 ```
@@ -683,11 +684,10 @@ export default class Input extends Component {
 - Set src for ```<Cropper />```：  
 
 ```javascript
-class CompanyLogoCropper extends Component {
+class LogoCropper extends Component {
 
   state = {
     src: null,
-    submitting: false,
   }
 
   componentWillMount() {
@@ -717,23 +717,10 @@ class CompanyLogoCropper extends Component {
     
 ```
 - Update props: 
- 
+
 ```javascript
 componentWillReceiveProps(nextProps) {
 	// 更新后重新初始化以及重新求值
-  .
-  .
-}
-```
-- Remove "title" attribute of a list:
-
-```javascript
-export default class BumenTreeSelect extends Component {
-  .
-  .
-  componentDidUpdate() {
-    $(".ant-select li").removeAttr("title")
-  }
   .
   .
 }
@@ -757,18 +744,6 @@ class HeadlinesPicker extends Component {
 class NotificationIcon extends Component {
   .
   .
-  // 轮询服务器 拿到通知中心的数据
-  componentDidMount() {
-    let that = this
-    if ( environment === 'development' ) {
-      console.warn("开发环境，消息轮询已关闭")
-    } else {
-      this.interval = setInterval(function() {
-        that.props.getNotificationInfo()
-      }, 30000)
-    }
-  }
-
   componentWillUnmount() {
     clearInterval(this.interval)
   }
@@ -779,9 +754,6 @@ class NotificationIcon extends Component {
 
 ## Redux
 
->### Immutable Update Patterns
----
-
 先来看一段代码：
 ```javascript
 var x = 12
@@ -790,36 +762,140 @@ var y = 12
 var object = { x: 1, y: 2 }
 var object2 = { x: 1, y: 2 }
 
-object == object2 // false
-object === object2 // false
+console.log(object == object2) 
+// false
+console.log(object === object2) 
+// false
 ```
 
 可以看出，object和object2的值相同。但是此二者在程序中却不相等。
 
 浅比较（也被称为引用相等）只检查两个不同变量是否为同一对象的引用；与之相反，深比较（也被称为原值相等）必须检查两个对象所有属性的值是否相等。
 
-所以，浅比较就是简单（且快速）的a === b，而深比较需要以递归的方式遍历两个对象的所有属性，在每一个循环中对比各个属性的值。
+所以，浅比较就是简单（且快速）的 a === b，而深比较需要以递归的方式遍历两个对象的所有属性，在每一个循环中对比各个属性的值。
 
 因为性能考虑，Redux 使用浅比较。
 
-浅比较不适用于可变对象：
-```javascript
-function mutateObj(obj) {
-  obj.key = 'newValue'
-  return obj
-}
-
-const param = { key: 'originalValue' }
-const returnVal = mutateObj(param)
-
-param === returnVal
-// true
-```
-```param```与```returnValue```的浅比较只是检查了这两个对象是否为相同对象的引用，而这在这段代码中总为真。虽然```mutateObj()```也许改变了```obj```的```key```属性，但它仍是传入的对象的引用。浅比较根本无法判断```mutateObj()```改变了它的值。
-
-故此，在React-Redux中我们要使用不可变对象。
-
-也就是说，总是去返回一个新的更新后的对象，而不是直接去修改原始的state tree。
+故此，在React-Redux中我们要使用不可变对象。也就是说，总是去返回一个新的更新后的对象，而不是直接去修改原始的state tree。
 
 如果某个Redux的reducer直接修改并返回了传给它的state对象，根state对象的值的确会改变，但这个对象自身的引用没有变化。React-Redux是通过对根state对象进行浅比较来决定是否要重新渲染包装的组件的。它不会检测到state的变化，也就不会触发重新渲染。
 
+>### Object Spread Operator
+---
+
+通过展开运算符```...```，可以将一个对象的可枚举属性拷贝至另一个对象。
+```javascript
+let foo = {name: 'foo', key: 'k1'}
+let bar = {...foo, key: 'k2'}
+
+console.log(foo)
+// {name: 'foo', key: 'k1'}
+console.log(bar)
+// {name: 'foo', key: 'k2'}
+
+console.log(foo == bar)
+// false
+console.log(foo === bar)
+// false
+
+//=================================
+let b = {...foo, key: 'k1'}
+console.log(b)
+// {name: 'foo', key: 'k1'}
+
+console.log(b == foo)
+// false
+console.log(b === foo)
+// false
+
+//=================================
+let c = foo
+console.log(c)
+// {name: "foo", key: "k1"}
+
+c.key = 'k3'
+console.log(c)
+// {name: "foo", key: "k3"}
+
+console.log(c == foo)
+// true
+console.log(c === foo)
+// true
+```
+
+>### Immutable Update Patterns
+---
+ref:
+- [Immutable Update Patterns](#https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns)
+- [
+Immutable Javascript using ES6 and beyond](#https://wecodetheweb.com/2016/02/12/immutable-javascript-using-es6-and-beyond/)
+
+不可变的基本更新操作，例如更新一个对象中一个字段:
+```javascript
+let foo = {name: 'foo', key: 'k1'}
+let bar = {...foo, key: 'k2'}
+```
+或者在数组的末尾增加一个数据:
+```javascript
+const arr = [1, 2]
+const newArr = [...arr, 3]
+```
+
+此外：
+- #### 更新嵌套的对象
+更新嵌套数据的关键是必须适当地复制和更新嵌套的每个级别:
+```javascript
+function updateVeryNestedField(state, action) {
+    return {
+        ....state,
+        first: {
+            ...state.first,
+            second: {
+                ...state.first.second,
+                [action.someId]: {
+                    ...state.first.second[action.someId],
+                    fourth: action.someValue,
+                }
+            }
+        }
+    }
+}
+```
+因此要尽可能保持状态扁平（flattened），并且尽可能多地构建[reducer](#https://redux.js.org/basics/reducers)。
+
+- #### 在数组中插入和删除数据
+避免使用```push```，```unshift```，```shift```。从而避免在reducer 中直接修改状态，“插入”和“删除”的行为如下所示：
+```javascript
+function insertItem(array, action) {
+    return [
+        ...array.slice(0, action.index),
+        action.item,
+        ...array.slice(action.index),
+    ]
+}
+
+function removeItem(array, action) {
+    return [
+        ...array.slice(0, action.index),
+        ...array.slice(action.index + 1),
+    ]
+}
+```
+- #### 在一个数组中更新一个项目
+更新数组的一项可以使用 Array.map, 返回我们想要更新那项的一个新值，和其他项原先的值：
+```javascript
+function updateObjectInArray(array, action) {
+    return array.map( (item, index) => {
+      // 保持原来的值
+      if(index !== action.index) {
+          return item
+      }
+
+      // 返回更新的值
+      return {
+          ...item,
+          ...action.item,
+      }
+    })
+}
+```
