@@ -816,6 +816,8 @@ console.log(c)
 c.key = 'k3'
 console.log(c)
 // {name: "foo", key: "k3"}
+console.log(foo)
+// {name: "foo", key: "k3"}
 
 console.log(c == foo)
 // true
@@ -826,9 +828,9 @@ console.log(c === foo)
 >### Immutable Update Patterns
 ---
 ref:
-- [Immutable Update Patterns](#https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns)
+- [Immutable Update Patterns](https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns)
 - [
-Immutable Javascript using ES6 and beyond](#https://wecodetheweb.com/2016/02/12/immutable-javascript-using-es6-and-beyond/)
+Immutable Javascript using ES6 and beyond](https://wecodetheweb.com/2016/02/12/immutable-javascript-using-es6-and-beyond/)
 
 不可变的基本更新操作，例如更新一个对象中一个字段:
 ```javascript
@@ -864,7 +866,7 @@ function updateVeryNestedField(state, action) {
 因此要尽可能保持状态扁平（flattened），并且尽可能多地构建[reducer](#https://redux.js.org/basics/reducers)。
 
 - #### 在数组中插入和删除数据
-避免使用```push```，```unshift```，```shift```。从而避免在reducer 中直接修改状态，“插入”和“删除”的行为如下所示：
+避免使用```push```，```unshift```，```shift```，从而避免在reducer 中直接修改状态。“插入”和“删除”的行为如下所示：
 ```javascript
 function insertItem(array, action) {
     return [
@@ -882,7 +884,7 @@ function removeItem(array, action) {
 }
 ```
 - #### 在一个数组中更新一个项目
-更新数组的一项可以使用 Array.map, 返回我们想要更新那项的一个新值，和其他项原先的值：
+更新数组的一项可以使用```Array.map```, 返回我们想要更新那项的一个新值，和其他项原来的值：
 ```javascript
 function updateObjectInArray(array, action) {
     return array.map( (item, index) => {
