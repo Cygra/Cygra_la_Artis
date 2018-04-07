@@ -33,10 +33,46 @@
 
 =>
 
-[1, 2, 3].map(function (n) {
-  console.log(n + 1)
-})
+"use strict";
 
+[1, 2, 3].map(function (n) {
+  return Math.pow(n, 2);
+});
+```
+```javascript
+const arr = [1, 2]
+const newArr = [...arr, 3]
+
+=>
+
+"use strict";
+
+var arr = [1, 2];
+var newArr = [].concat(arr, [3]);
+```
+```javascript
+let foo = {name: 'foo', key: 'k1'}
+let bar = {...foo, key: 'k2'}
+
+=>
+
+'use strict';
+
+var _extends = Object.assign ||
+function(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+  return target;
+};
+
+var foo = { name: 'foo', key: 'k1' };
+var bar = _extends({}, foo, { key: 'k2' });
 ```
 
 >### ```var``` vs ```let``` vs ```const```
