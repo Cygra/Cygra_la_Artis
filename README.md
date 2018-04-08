@@ -2,6 +2,9 @@
 
 包括如下内容:
 
+
+- [Browser Object](#browser-object)
+  - [Location](#location)
 - [ES Features](#es-features)
   - [Babel](#babel)
   - [```var``` vs ```let``` vs ```const```](#var-vs-let-vs-const)
@@ -21,9 +24,72 @@
     - [Object Spread Operator](#object-spread-operator)
     - [Immutable Update Patterns](#immutable-update-patterns)
 
+
+# Browser Object
+>## Location
+---
+
+URL的完整格式可以表示成```scheme:[//[user[:password]@]host[:port]][/path][?query][#fragment]```。  
+Location 对象包含有关当前 URL 的信息，是Window对象的一个部分，可通过```window.location```属性来访问，也可单独访问如```window.location.pathname```。  
+在[Github-Wikipedia](#https://github.com/)页面打开检查，在命令行输入```window.location```，可得到如下输出：
+
+```javascript
+ancestorOrigin: DOMStringList {length: 0}
+assign: ƒ ()
+hash: ""
+host: "en.wikipedia.org"
+hostname: "en.wikipedia.org"
+href: "https://en.wikipedia.org/wiki/GitHub"
+origin: "https: //en.wikipedia.org"
+pathname: "/wiki/GitHub"
+port: ""
+protocol: "https: "
+reload: ƒ reload()
+replace: ƒ ()
+search: ""
+toString: ƒ toString()
+valueOf: ƒ valueOf()
+Symbol(Symbol.toPrimitive): undefined
+__proto__: Location
+```
+
+按序：
+- >```hash: ""```  
+URL 的片段（fragment）部分，以“#”开头。  
+片段是用来指导浏览器动作的，对服务器端不产生作用。所以，HTTP请求中不包括“#”。单单改变“#”后的部分，浏览器只会滚动到相应位置，不会重新加载网页。但是，浏览器会增加一条相应访问记录。  
+当我们点击当前页面目录当中的某条（例如：[Licensing of repositories](#https://en.wikipedia.org/wiki/GitHub#Licensing_of_repositories)）即可跳转到页面相应的位置，体现在html中，则是```<.. id="Licensing_of_repositories" ../>```对应的位置。同时，历史记录中也会新增一条带有相应片短信息的记录。
+- >```host: "en.wikipedia.org"```  
+主机名称和端口号。  
+```host = hostname + ":" + port```   
+当访问```localhost:3000```时则返回```"localhost:3000"```。
+- >```hostname: "en.wikipedia.org"```  
+主机名称。  
+```host = hostname + ":" + port```  
+当访问```localhost:3000```时则返回```"localhost"```。
+- >```href: "https: //en.wikipedia.org//wiki/GitHub"```  
+完整的URL。
+- >```origin: "https: //en.wikipedia.org"```  
+包含页面来源的域名。只读。  
+- >```pathname: "/wiki/GitHub"```  
+当前 URL 的路径（path），以“/”开头。
+- >```port: ""```  
+端口号。  
+当访问```localhost:3000```时则返回```"3000"```。  
+```host = hostname + ":" + port```   
+- >```protocol: "https: "```  
+当前 URL 的协议，```http:```、```https:```、```ftp:```、```file:```等。
+- >```search: ""```    
+当前 URL 的查询部分（query），以“?”开头。  
+可以有多个参数，以“&”分隔。  
+例如，在维基百科[搜索页面](#https://en.wikipedia.org/w/index.php?search)搜索"GitHub"：  
+URL为  
+```https://en.wikipedia.org/w/index.php?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```  
+search为  
+```?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```
+
 # ES Features
 
->### Babel
+>## Babel
 ---
 
 [Babel](https://babeljs.io/)是一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。
@@ -75,7 +141,7 @@ var foo = { name: 'foo', key: 'k1' };
 var bar = _extends({}, foo, { key: 'k2' });
 ```
 
->### ```var``` vs ```let``` vs ```const```
+>## ```var``` vs ```let``` vs ```const```
 ---
 
 讲个笑话：
@@ -138,7 +204,7 @@ a.length // 4
 a = 2 // Uncaught TypeError: Assignment to constant variable.
 ```
 
->### ```function``` vs ```class```
+>## ```function``` vs ```class```
 ---
 
 生成实例对象的传统方法是通过构造函数```funciton```。
@@ -203,7 +269,7 @@ class ColorPoint extends Point {
 使用```super```的时候，必须显式指定是作为函数还是对象使用，否则解析代码时会混淆```super```所代表的含义，报错。
 
 
->### ```export``` vs ```import```
+>## ```export``` vs ```import```
 ---
 
 ES6实现了模块功能，通过```export```命令输出代码，通过```import```命令输入代码，从而将一个大程序拆分成互相依赖的小文件。  
@@ -261,7 +327,7 @@ if (condition) {
 <script type="module" src="./foo.js"></script>
 ```
 
->### Arrow Function
+>## Arrow Function
 ---
 
 箭头函数比函数表达式更短，并且不绑定自己的```this```，```arguments```，```super```或```new.target```。箭头函数不能用作构造函数，适合用于非方法函数。
@@ -362,7 +428,7 @@ a() // 1
 a() // 2
 ```
 
->### Destructuring
+>## Destructuring
 ---
 
 将『值』从『数组』
@@ -443,7 +509,7 @@ for (var {name: n, family: { father: f } } of people) {
 ```
 提取到不同的变量中。
 
->### ```for..of```
+>## ```for..of```
 ---
 
 ```for..of```语句在可迭代对象（```Array```，```Map```，```Set```，```String```，```arguments对象```等）上创建一个迭代循环。
@@ -488,7 +554,7 @@ for (let paragraph of articleParagraphs) {
 }
 ```
 
->### Template Literals
+>## Template Literals
 ---
 
 ```javascript
@@ -519,7 +585,7 @@ var output = myTag`that ${ person } is a ${ age }`
 console.log(output)    // that Mike is a young person
 ```
 
->### Rest vs Spread
+>## Rest vs Spread
 ---
 
 默认模式：
@@ -923,17 +989,17 @@ function removeItem(array, action) {
 更新数组的一项可以使用```Array.map```, 返回我们想要更新那项的一个新值，和其他项原来的值：
 ```javascript
 function updateObjectInArray(array, action) {
-    return array.map( (item, index) => {
-      // 保持原来的值
-      if(index !== action.index) {
-          return item
-      }
+  return array.map( (item, index) => {
+    // 保持原来的值
+    if(index !== action.index) {
+        return item
+    }
 
-      // 返回更新的值
-      return {
-          ...item,
-          ...action.item,
-      }
-    })
+    // 返回更新的值
+    return {
+        ...item,
+        ...action.item,
+    }
+  })
 }
 ```
