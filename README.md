@@ -3,7 +3,7 @@
 包括如下内容:
 
 
-- [Browser Object](#browser-object)
+- [Browser Object](#browser-object)
   - [Location](#location)
 - [ES Features](#es-features)
   - [Babel](#babel)
@@ -55,11 +55,11 @@ __proto__: Location
 
 按序：
 - >```hash: ""```  
-URL 的片段（fragment）部分，以“#”开头。  
+URL 的片段（fragment）部分，以“#”开头。  
 片段是用来指导浏览器动作的，对服务器端不产生作用。所以，HTTP请求中不包括“#”。单单改变“#”后的部分，浏览器只会滚动到相应位置，不会重新加载网页。但是，浏览器会增加一条相应访问记录。  
-当我们点击当前页面目录当中的某条（例如：[Licensing of repositories](#https://en.wikipedia.org/wiki/GitHub#Licensing_of_repositories)）即可跳转到页面相应的位置，体现在html中，则是```<.. id="Licensing_of_repositories" ../>```对应的位置。同时，历史记录中也会新增一条带有相应片短信息的记录。
+当我们点击当前页面目录当中的某条（例如：[Licensing of repositories](#https://en.wikipedia.org/wiki/GitHub#Licensing_of_repositories)）即可跳转到页面相应的位置，体现在html中，则是```<.. id="Licensing_of_repositories" ../>```对应的位置。同时，历史记录中也会新增一条带有相应片段信息的记录。
 - >```host: "en.wikipedia.org"```  
-主机名称和端口号。  
+主机名称和端口号。  
 ```host = hostname + ":" + port```   
 当访问```localhost:3000```时则返回```"localhost:3000"```。
 - >```hostname: "en.wikipedia.org"```  
@@ -69,7 +69,7 @@ __proto__: Location
 - >```href: "https: //en.wikipedia.org//wiki/GitHub"```  
 完整的URL。
 - >```origin: "https: //en.wikipedia.org"```  
-包含页面来源的域名。只读。  
+包含页面来源的域名。只读。  
 - >```pathname: "/wiki/GitHub"```  
 当前 URL 的路径（path），以“/”开头。
 - >```port: ""```  
@@ -81,7 +81,7 @@ __proto__: Location
 - >```search: ""```    
 当前 URL 的查询部分（query），以“?”开头。  
 可以有多个参数，以“&”分隔。  
-例如，在维基百科[搜索页面](#https://en.wikipedia.org/w/index.php?search)搜索"GitHub"：  
+例如，在维基百科[搜索页面](#https://en.wikipedia.org/w/index.php?search)搜索"GitHub"：  
 URL为  
 ```https://en.wikipedia.org/w/index.php?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```  
 search为  
