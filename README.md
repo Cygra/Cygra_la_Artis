@@ -85,7 +85,8 @@ URL 的片段（fragment）部分，以“#”开头。
 URL为  
 ```https://en.wikipedia.org/w/index.php?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```  
 search为  
-```?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```
+```?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```  
+可以使用[qs.parse()](https://www.npmjs.com/package/qs)进行解析。
 
 # ES Features
 
