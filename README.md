@@ -1079,3 +1079,7 @@ A lightweight JavaScript date library for parsing, validating, manipulating, and
 ```javascript
 let initDate = moment().subtract(6, 'quarters').startOf('quarter')
 ```
+
+>## [js-cookie](https://github.com/js-cookie/js-cookie)
+---
+A simple, lightweight JavaScript API for handling browser cookies.
