@@ -23,14 +23,16 @@
   - [Redux](#redux)
     - [Object Spread Operator](#object-spread-operator)
     - [Immutable Update Patterns](#immutable-update-patterns)
+- [库](#lib)
+
 
 
 # Browser Object
 >## Location
 ---
 
-URL的完整格式可以表示成```scheme:[//[user[:password]@]host[:port]][/path][?query][#fragment]```。  
-Location 对象包含有关当前 URL 的信息，是Window对象的一个部分，可通过```window.location```属性来访问，也可单独访问如```window.location.pathname```。  
+URL的完整格式可以表示成```scheme:[//[user[:password]@]host[:port]][/path][?query][#fragment]```。
+Location 对象包含有关当前 URL 的信息，是Window对象的一个部分，可通过```window.location```属性来访问，也可单独访问如```window.location.pathname```。
 在[Github-Wikipedia](#https://github.com/)页面打开检查，在命令行输入```window.location```，可得到如下输出：
 
 ```javascript
@@ -54,38 +56,38 @@ __proto__: Location
 ```
 
 按序：
-- >```hash: ""```  
-URL 的片段（fragment）部分，以“#”开头。  
-片段是用来指导浏览器动作的，对服务器端不产生作用。所以，HTTP请求中不包括“#”。单单改变“#”后的部分，浏览器只会滚动到相应位置，不会重新加载网页。但是，浏览器会增加一条相应访问记录。  
+- >```hash: ""```
+URL 的片段（fragment）部分，以“#”开头。
+片段是用来指导浏览器动作的，对服务器端不产生作用。所以，HTTP请求中不包括“#”。单单改变“#”后的部分，浏览器只会滚动到相应位置，不会重新加载网页。但是，浏览器会增加一条相应访问记录。
 当我们点击当前页面目录当中的某条（例如：[Licensing of repositories](#https://en.wikipedia.org/wiki/GitHub#Licensing_of_repositories)）即可跳转到页面相应的位置，体现在html中，则是```<.. id="Licensing_of_repositories" ../>```对应的位置。同时，历史记录中也会新增一条带有相应片段信息的记录。
-- >```host: "en.wikipedia.org"```  
-主机名称和端口号。  
-```host = hostname + ":" + port```   
+- >```host: "en.wikipedia.org"```
+主机名称和端口号。
+```host = hostname + ":" + port```
 当访问```localhost:3000```时则返回```"localhost:3000"```。
-- >```hostname: "en.wikipedia.org"```  
-主机名称。  
-```host = hostname + ":" + port```  
+- >```hostname: "en.wikipedia.org"```
+主机名称。
+```host = hostname + ":" + port```
 当访问```localhost:3000```时则返回```"localhost"```。
-- >```href: "https: //en.wikipedia.org//wiki/GitHub"```  
+- >```href: "https: //en.wikipedia.org//wiki/GitHub"```
 完整的URL。
-- >```origin: "https: //en.wikipedia.org"```  
-包含页面来源的域名。只读。  
-- >```pathname: "/wiki/GitHub"```  
+- >```origin: "https: //en.wikipedia.org"```
+包含页面来源的域名。只读。
+- >```pathname: "/wiki/GitHub"```
 当前 URL 的路径（path），以“/”开头。
-- >```port: ""```  
-端口号。  
-当访问```localhost:3000```时则返回```"3000"```。  
-```host = hostname + ":" + port```   
-- >```protocol: "https: "```  
+- >```port: ""```
+端口号。
+当访问```localhost:3000```时则返回```"3000"```。
+```host = hostname + ":" + port```
+- >```protocol: "https: "```
 当前 URL 的协议，```http:```、```https:```、```ftp:```、```file:```等。
-- >```search: ""```    
-当前 URL 的查询部分（query），以“?”开头。  
-可以有多个参数，以“&”分隔。  
-例如，在维基百科[搜索页面](#https://en.wikipedia.org/w/index.php?search)搜索"GitHub"：  
-URL为  
-```https://en.wikipedia.org/w/index.php?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```  
-search为  
-```?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```  
+- >```search: ""```
+当前 URL 的查询部分（query），以“?”开头。
+可以有多个参数，以“&”分隔。
+例如，在维基百科[搜索页面](#https://en.wikipedia.org/w/index.php?search)搜索"GitHub"：
+URL为
+```https://en.wikipedia.org/w/index.php?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```
+search为
+```?search=GitHub&title=Special:Search&profile=default&fulltext=1&searchToken=adrn17aaxwzddigbhqm76pxru```
 可以使用[qs.parse()](https://www.npmjs.com/package/qs)进行解析。
 
 # ES Features
@@ -234,7 +236,7 @@ class Point {
   toString() {
     return '(' + this.x + ', ' + this.y + ')'
   }
-  
+
   foo() {
   }
 }
@@ -247,11 +249,11 @@ class ColorPoint extends Point {
     super(x, y) //继承父类的x, y
     this.color = color
   }
-  
+
   toString() {
     return this.color + ' ' + super.toString() // 调用父类的toString()
   }
-  
+
   bar() {
     super.foo()
   }
@@ -259,13 +261,13 @@ class ColorPoint extends Point {
 ```
 
 ```class```通过```extends```实现继承。
-子类必须在```constructor```中调用```super```方法，从而继承父类的```this```对象。子类还可以使用```super	```来新建父类的```this```对象。  
+子类必须在```constructor```中调用```super```方法，从而继承父类的```this```对象。子类还可以使用```super	```来新建父类的```this```对象。
 
-子类的构建是基于对父类的修改加工，只有使用```super```方法才能返回父类。而ES5的继承是先创造子类的实例对象```this```，然后再将父类的方法添加到```this```上面。  
+子类的构建是基于对父类的修改加工，只有使用```super```方法才能返回父类。而ES5的继承是先创造子类的实例对象```this```，然后再将父类的方法添加到```this```上面。
 
-```super```作为函数时，虽然代表了父类```Point```的构造函数，但是返回的是子类```ColorPoint```。即，```super```的```this```指向```ColorPoint```，相当于```Ponit.prototype.constructor.call(this)```。  
+```super```作为函数时，虽然代表了父类```Point```的构造函数，但是返回的是子类```ColorPoint```。即，```super```的```this```指向```ColorPoint```，相当于```Ponit.prototype.constructor.call(this)```。
 
-```super```作为对象时，```super.foo()```调用父类```Ponit.prototype.foo()```，但是内部的```this```指向子类```ColorPoint```。  
+```super```作为对象时，```super.foo()```调用父类```Ponit.prototype.foo()```，但是内部的```this```指向子类```ColorPoint```。
 
 使用```super```的时候，必须显式指定是作为函数还是对象使用，否则解析代码时会混淆```super```所代表的含义，报错。
 
@@ -273,16 +275,16 @@ class ColorPoint extends Point {
 >## ```export``` vs ```import```
 ---
 
-ES6实现了模块功能，通过```export```命令输出代码，通过```import```命令输入代码，从而将一个大程序拆分成互相依赖的小文件。  
-> Ruby: ```require 'nokogiri'```  
-> Python: ```import module_1```  
-> CSS: ```@import url("global.css")```  
+ES6实现了模块功能，通过```export```命令输出代码，通过```import```命令输入代码，从而将一个大程序拆分成互相依赖的小文件。
+> Ruby: ```require 'nokogiri'```
+> Python: ```import module_1```
+> CSS: ```@import url("global.css")```
 
-使用```export```输出，可使外部读取模块内部的变量、函数或类。  
-使用```as```可对输出的变量、函数、类重命名。 
-使用```export default```可以指定模块的默认输出。  
-```export```可以出现在模块顶层的任何位置。因为```export```命令是编译阶段静态执行的，在代码运行之前，所以具有提升效果。  
-```const```声明的常量也可输出。  
+使用```export```输出，可使外部读取模块内部的变量、函数或类。
+使用```as```可对输出的变量、函数、类重命名。
+使用```export default```可以指定模块的默认输出。
+```export```可以出现在模块顶层的任何位置。因为```export```命令是编译阶段静态执行的，在代码运行之前，所以具有提升效果。
+```const```声明的常量也可输出。
 
 ```javascript
 sample.js
@@ -298,9 +300,9 @@ export const A = 1
 export const B = 2
 export const C = 3
 ```
-使用```import```命令加载其它模块的部分或整个模块。  
-使用```as```可对输入的变量、函数、类重命名。   
-```import```可以出现在模块顶层的任何位置。因为```import```命令是编译阶段静态执行的，在代码运行之前，所以具有提升效果。  
+使用```import```命令加载其它模块的部分或整个模块。
+使用```as```可对输入的变量、函数、类重命名。
+```import```可以出现在模块顶层的任何位置。因为```import```命令是编译阶段静态执行的，在代码运行之前，所以具有提升效果。
 ```import```输入的变量是只读的。
 
 ```javascript
@@ -354,7 +356,7 @@ var materials = [
 ]
 
 //ES5
-materials.map(function(material) { 
+materials.map(function(material) {
   console.log(material.length)
 }) // [8, 6, 7, 9]
 
@@ -403,7 +405,7 @@ let callback
 
 callback = callback || function() {} // ok
 
-callback = callback || () => {}     
+callback = callback || () => {}
 // SyntaxError: invalid arrow-function arguments
 
 callback = callback || (() => {}) // ok
@@ -458,8 +460,8 @@ console.log(b) // [2, 3]
 ```javascript
 var o = {p: 42, q: true}
 var {p: foo, q: bar} = o
- 
-console.log(foo) // 42 
+
+console.log(foo) // 42
 console.log(bar) // true
 ```
 ```javascript
@@ -469,7 +471,7 @@ console.log(a) // 3
 console.log(b) // 5
 ```
 ```javascript
-function Chart({size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {}) 
+function Chart({size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {})
 {
   console.log(size, cords, radius)
 }
@@ -614,7 +616,7 @@ function func(z, ...[a, b, c]) {
   console.log(a + b + c)
 }
 
-func(1)          // NaN 
+func(1)          // NaN
 // b、c尚未定义
 
 func(1, 2, 3, 4) // 9
@@ -667,7 +669,7 @@ We can then use ```this.setState``` to update the state.
 When we call ```this.setState```, React merges the object we provide into the current state, which means that the state can be updated partially.
 
 State updates may be asynchronous, so as to update the state we can use a function ```(prevState, props) => ({...})``` which receives two arguments, the previous state as the first argument, and the props at the time the update is applied as the second.
- 
+
 >### Lifecycle
 ---
 
@@ -685,7 +687,7 @@ The whole procedure can be illustrated as:
 2. React then calls the component’s ```render()``` method. React then updates the DOM to match the component’s render output.
 3. When the component has been rendered in the DOM, React calls the ```componentDidMount()``` lifecycle hook. Inside it, the component asks the browser to run some code.
 4. We can use ```this.setState``` to let React know that the state has been updated. React then calls ```render()``` method again to update the DOM.
-5. If the Compo component will be removed from DOM, React calls ```componentWillUnmount()``` lifecycle hook so the text changes. 
+5. If the Compo component will be removed from DOM, React calls ```componentWillUnmount()``` lifecycle hook so the text changes.
 
 ```javascript
 class Compo extends React.Component {
@@ -724,12 +726,12 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-In addition to the two hooks mentioned, the component lifecycle also have some other methods to run code at particular times in the process.  
+In addition to the two hooks mentioned, the component lifecycle also have some other methods to run code at particular times in the process.
 
-Methods with ```-will-``` are called right **before** something happens.  
+Methods with ```-will-``` are called right **before** something happens.
 Methods with ```-did-``` are called right **after** something happens.
 
-- Mounting  
+- Mounting
 When a component is being created and inserted into the DOM:
 
 	- ```constructor()```is called ** before the component is mounted**. The constructor is the right place to initialize state.
@@ -737,21 +739,21 @@ When a component is being created and inserted into the DOM:
 	- ```render()```is always required. It requires ```this.props``` and ```this.state``` and return React Element(JSX) or String and Number or Portals or ```null``` or Booleans.
 	- ```componentDidMount()```is called right after mount.
 
-- Updating  
+- Updating
 When a component is being re-rendered:
 
 	- ```componentWillReceiveProps(nextProps)```is called before a mounted component receives new props.
 	- ```shouldComponentUpdate(nextProps, nextState)```is to let React know if a component’s output is not affected by the current change in state or props. If ```shouldComponentUpdate()``` returns false, then ```componentWillUpdate()```, ```render()```, and ```componentDidUpdate()``` will not be invoked.
 	- ```componentWillUpdate(nextProps, nextState)```is invoked just before rendering when new props or state are being received. It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
-	- ```render()```  
+	- ```render()```
 	- ```componentDidUpdate()``` is invoked immediately after updating occurs (except the initial render). It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
 
-- Unmounting  
+- Unmounting
 When a component is being removed from the DOM:
 
 	- ```componentWillUnmount()```is called right before a component is unmounted and destroyed to perform any necessary cleanup such as invalidating a timer.
 
-- Error Handling  
+- Error Handling
 When there is an error during rendering, in a lifecycle method, or in the constructor of any child component:
 
 	- ```componentDidCatch(error, info)```catches JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed.
@@ -776,15 +778,15 @@ export default class Input extends Component {
       this.textInput.select()
     }
   }
-  
+
   .
   .
-  
+
 }
-  
+
 ```
 
-- Set src for ```<Cropper />```：  
+- Set src for ```<Cropper />```：
 
 ```javascript
 class LogoCropper extends Component {
@@ -799,10 +801,10 @@ class LogoCropper extends Component {
       const dataURL = e.target.result
       this.setState({src: dataURL})
     }
-    
+
   .
   .
-  
+
   render(){
     return (
     .
@@ -816,10 +818,10 @@ class LogoCropper extends Component {
     .
   }
 }
-    
-    
+
+
 ```
-- Update props: 
+- Update props:
 
 ```javascript
 componentWillReceiveProps(nextProps) {
@@ -865,9 +867,9 @@ var y = 12
 var object = { x: 1, y: 2 }
 var object2 = { x: 1, y: 2 }
 
-console.log(object == object2) 
+console.log(object == object2)
 // false
-console.log(object === object2) 
+console.log(object === object2)
 // false
 ```
 
@@ -1003,4 +1005,77 @@ function updateObjectInArray(array, action) {
     }
   })
 }
+```
+
+# lib
+>## [JavaScript Style Guide](https://github.com/standard/standard)
+---
+The most IMPORTANT.
+
+>## [react-redux](https://github.com/reduxjs/react-redux)
+---
+Official React bindings for [Redux](https://github.com/reduxjs/redux).
+
+>## [redux-saga](https://github.com/redux-saga/redux-saga)
+---
+```redux-saga``` is a library that aims to make application side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) easier to manage, more efficient to execute, easy to test, and better at handling failures.
+
+>## [jquery-color](https://github.com/jquery/jquery-color)
+---
+一个jQuery扩展库，可以实现对网页的色彩控制，如：
+```javascript
+  $('#foo').animate({
+    backgroundColor: 'rgb(249,204,226)'
+  }, 2200);
+```
+
+>## [ant-design](https://github.com/ant-design/ant-design)
+---
+方便易用的UI组件库。
+
+>## [zepto](https://github.com/madrobby/zepto)
+---
+轻量级的JS库。
+
+>## [lodash](https://github.com/lodash/lodash)
+---
+提供了大量的方便的工具。
+例如可以用来防抖动的[```debounce（）```](https://github.com/lodash/lodash/blob/master/debounce.js)：
+```javascript
+debounceFetchData = debounce(this.props.fetchData, 200, {
+  leading: false,
+  trailing: true,
+  maxWait: 200,
+})
+```
+例如获取数组中除最后一个元素外其余元素的[```initial()```](https://github.com/lodash/lodash/blob/master/initial.js)，其源码：
+```javascript
+function initial(array) {
+  const length = array == null ? 0 : array.length
+  return length ? slice(array, 0, -1) : []
+}
+```
+and：[You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
+
+>## [datepicker](https://github.com/fengyuanchen/datepicker)
+---
+A simple jQuery datepicker plugin.
+
+>## [qrious](https://github.com/neocotic/qrious)
+---
+Pure JavaScript library for QR code generation using canvas.
+```javascript
+var qr = new QRious({
+  element: document.getElementById('qr'),
+  value: qrUrl,
+  size: 160,
+  level: 'M',
+})
+```
+
+>## [moment](https://github.com/neocotic/qrious)
+---
+A lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
+```javascript
+let initDate = moment().subtract(6, 'quarters').startOf('quarter')
 ```
