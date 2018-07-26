@@ -734,29 +734,29 @@ Methods with ```-did-``` are called right **after** something happens.
 - Mounting
 When a component is being created and inserted into the DOM:
 
-	- ```constructor()```is called ** before the component is mounted**. The constructor is the right place to initialize state.
-	- ```componentWillMount()```is called right before mount. ```*基本不会使用```
-	- ```render()```is always required. It requires ```this.props``` and ```this.state``` and return React Element(JSX) or String and Number or Portals or ```null``` or Booleans.
-	- ```componentDidMount()```is called right after mount.
+  - ```constructor()```is called ** before the component is mounted**. The constructor is the right place to initialize state.
+  - ```componentWillMount()```is called right before mount. ```*基本不会使用```
+  - ```render()```is always required. It requires ```this.props``` and ```this.state``` and return React Element(JSX) or String and Number or Portals or ```null``` or Booleans.
+  - ```componentDidMount()```is called right after mount.
 
 - Updating
 When a component is being re-rendered:
 
-	- ```componentWillReceiveProps(nextProps)```is called before a mounted component receives new props.
-	- ```shouldComponentUpdate(nextProps, nextState)```is to let React know if a component’s output is not affected by the current change in state or props. If ```shouldComponentUpdate()``` returns false, then ```componentWillUpdate()```, ```render()```, and ```componentDidUpdate()``` will not be invoked.
-	- ```componentWillUpdate(nextProps, nextState)```is invoked just before rendering when new props or state are being received. It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
-	- ```render()```
-	- ```componentDidUpdate()``` is invoked immediately after updating occurs (except the initial render). It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
+  - ```componentWillReceiveProps(nextProps)```is called before a mounted component receives new props.
+  - ```shouldComponentUpdate(nextProps, nextState)```is to let React know if a component’s output is not affected by the current change in state or props. If ```shouldComponentUpdate()``` returns false, then ```componentWillUpdate()```, ```render()```, and ```componentDidUpdate()``` will not be invoked.
+  - ```componentWillUpdate(nextProps, nextState)```is invoked just before rendering when new props or state are being received. It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
+  - ```render()```
+  - ```componentDidUpdate()``` is invoked immediately after updating occurs (except the initial render). It will not be invoked if ```shouldComponentUpdate()``` returns ```false```.
 
 - Unmounting
 When a component is being removed from the DOM:
 
-	- ```componentWillUnmount()```is called right before a component is unmounted and destroyed to perform any necessary cleanup such as invalidating a timer.
+  - ```componentWillUnmount()```is called right before a component is unmounted and destroyed to perform any necessary cleanup such as invalidating a timer.
 
 - Error Handling
 When there is an error during rendering, in a lifecycle method, or in the constructor of any child component:
 
-	- ```componentDidCatch(error, info)```catches JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed.
+  - ```componentDidCatch(error, info)```catches JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed.
 
 >### Scene
 ---
@@ -811,11 +811,11 @@ class LogoCropper extends Component {
     return (
     .
     .
-	   <Cropper
-	     src={this.state.src}
-	     .
-	     .
-	   />
+    <Cropper
+       src={this.state.src}
+       .
+       .
+    />
     .
     .
   }
@@ -827,7 +827,7 @@ class LogoCropper extends Component {
 
 ```javascript
 componentWillReceiveProps(nextProps) {
-	// 更新后重新初始化以及重新求值
+  // 更新后重新初始化以及重新求值
   .
   .
 }
@@ -955,19 +955,19 @@ const newArr = [...arr, 3]
 更新嵌套数据的关键是必须适当地复制和更新嵌套的每个级别:
 ```javascript
 function updateVeryNestedField(state, action) {
-    return {
-        ....state,
-        first: {
-            ...state.first,
-            second: {
-                ...state.first.second,
-                [action.someId]: {
-                    ...state.first.second[action.someId],
-                    fourth: action.someValue,
-                }
-            }
+  return {
+    ....state,
+    first: {
+      ...state.first,
+      second: {
+        ...state.first.second,
+        [action.someId]: {
+        ...state.first.second[action.someId],
+          fourth: action.someValue,
         }
+      }
     }
+  }
 }
 ```
 因此要尽可能保持状态扁平（flattened），并且尽可能多地构建[reducer](https://redux.js.org/basics/reducers)。
@@ -976,18 +976,18 @@ function updateVeryNestedField(state, action) {
 避免使用```push```，```unshift```，```shift```，从而避免在reducer 中直接修改状态。“插入”和“删除”的行为如下所示：
 ```javascript
 function insertItem(array, action) {
-    return [
-        ...array.slice(0, action.index),
-        action.item,
-        ...array.slice(action.index),
-    ]
+  return [
+    ...array.slice(0, action.index),
+    action.item,
+    ...array.slice(action.index),
+  ]
 }
 
 function removeItem(array, action) {
-    return [
-        ...array.slice(0, action.index),
-        ...array.slice(action.index + 1),
-    ]
+  return [
+    ...array.slice(0, action.index),
+    ...array.slice(action.index + 1),
+  ]
 }
 ```
 - #### 在一个数组中更新一个项目
@@ -997,13 +997,13 @@ function updateObjectInArray(array, action) {
   return array.map( (item, index) => {
     // 保持原来的值
     if(index !== action.index) {
-        return item
+      return item
     }
 
     // 返回更新的值
     return {
-        ...item,
-        ...action.item,
+      ...item,
+      ...action.item,
     }
   })
 }
