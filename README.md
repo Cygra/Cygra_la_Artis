@@ -735,7 +735,7 @@ Methods with ```-did-``` are called right **after** something happens.
 When a component is being created and inserted into the DOM:
 
 	- ```constructor()```is called ** before the component is mounted**. The constructor is the right place to initialize state.
-	- ```componentWillMount()```is called right before mount.
+	- ```componentWillMount()```is called right before mount. ```*基本不会使用```
 	- ```render()```is always required. It requires ```this.props``` and ```this.state``` and return React Element(JSX) or String and Number or Portals or ```null``` or Booleans.
 	- ```componentDidMount()```is called right after mount.
 
@@ -795,11 +795,13 @@ class LogoCropper extends Component {
     src: null,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const fileReader = new FileReader()
     fileReader.onload = (e) => {
       const dataURL = e.target.result
-      this.setState({src: dataURL})
+      this.setState({
+        src: dataURL
+      })
     }
 
   .
