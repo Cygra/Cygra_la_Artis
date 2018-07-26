@@ -179,12 +179,12 @@ if (true) {
 ```let```不允许重复声明。
 
 ```javascript
-function func() {
+func = () => {
   let a = 10
   var a = 1
 } // undefined
 
-function func() {
+func = () => {
   let a = 10
   let a = 1
 } // undefined
@@ -289,7 +289,7 @@ ES6实现了模块功能，通过```export```命令输出代码，通过```impor
 ```javascript
 sample.js
 
-export function func() {
+export func = () => {
   ..
 }
 ```
@@ -443,7 +443,7 @@ console.log(a) // 1
 console.log(b) // 2
 ```
 ```javascript
-function f() {
+f = () => {
   return [1, 2, 3]
 }
 
@@ -567,7 +567,7 @@ for (let paragraph of articleParagraphs) {
 var person = 'Mike'
 var age = 28
 
-function myTag(strings, personExp, ageExp) {
+myTag = (strings, personExp, ageExp) => {
 
   var str0 = strings[0]
   var str1 = strings[1]
@@ -593,14 +593,14 @@ console.log(output)    // that Mike is a young person
 
 默认模式：
 ```javascript
-function f(x, y=1) {
+f = (x, y=1) => {
   console.log(x + y);
 }
 f(2)  // 3
 ```
 剩余：
 ```javascript
-function func(...A) {
+func = (...A) => {
   console.log(A)
   console.log(A.length)
   console.log(typeof(A))
@@ -612,7 +612,7 @@ func(1, 2, 3)
 // object
 ```
 ```javascript
-function func(z, ...[a, b, c]) {
+func = (z, ...[a, b, c]) => {
   console.log(a + b + c)
 }
 
@@ -628,7 +628,7 @@ func(1, 2, 3, 4, 5) // 9
 传播：
 ```javascript
 // 传递参数
-function sum(x, y, z) {
+sum = (x, y, z) => {
   console.log(x + y + z)
 }
 
@@ -954,7 +954,7 @@ const newArr = [...arr, 3]
 - #### 更新嵌套的对象
 更新嵌套数据的关键是必须适当地复制和更新嵌套的每个级别:
 ```javascript
-function updateVeryNestedField(state, action) {
+updateVeryNestedField = (state, action) => {
   return {
     ....state,
     first: {
@@ -975,7 +975,7 @@ function updateVeryNestedField(state, action) {
 - #### 在数组中插入和删除数据
 避免使用```push```，```unshift```，```shift```，从而避免在reducer 中直接修改状态。“插入”和“删除”的行为如下所示：
 ```javascript
-function insertItem(array, action) {
+insertItem = (array, action) => {
   return [
     ...array.slice(0, action.index),
     action.item,
@@ -983,7 +983,7 @@ function insertItem(array, action) {
   ]
 }
 
-function removeItem(array, action) {
+removeItem = (array, action) => {
   return [
     ...array.slice(0, action.index),
     ...array.slice(action.index + 1),
@@ -993,7 +993,7 @@ function removeItem(array, action) {
 - #### 在一个数组中更新一个项目
 更新数组的一项可以使用```Array.map```, 返回我们想要更新那项的一个新值，和其他项原来的值：
 ```javascript
-function updateObjectInArray(array, action) {
+updateObjectInArray = (array, action) => {
   return array.map( (item, index) => {
     // 保持原来的值
     if(index !== action.index) {
