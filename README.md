@@ -277,7 +277,9 @@ class ColorPoint extends Point {
 
 ES6实现了模块功能，通过```export```命令输出代码，通过```import```命令输入代码，从而将一个大程序拆分成互相依赖的小文件。
 > Ruby: ```require 'nokogiri'```
+
 > Python: ```import module_1```
+
 > CSS: ```@import url("global.css")```
 
 使用```export```输出，可使外部读取模块内部的变量、函数或类。
@@ -362,7 +364,7 @@ materials.map(function(material) {
 
 
 //Arrow Function
-materials.map((material) => {
+materials.map(material => {
   console.log(material.length)
 }) // [8, 6, 7, 9]
 
@@ -471,8 +473,7 @@ console.log(a) // 3
 console.log(b) // 5
 ```
 ```javascript
-function Chart({size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {})
-{
+function Chart ({size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {}) {
   console.log(size, cords, radius)
 }
 
@@ -521,7 +522,7 @@ for (var {name: n, family: { father: f } } of people) {
 let iterable = [1, 2, 3]
 
 for (const value of iterable) {
-    console.log(value)
+  console.log(value)
 }
 // 1
 // 2
@@ -564,27 +565,20 @@ for (let paragraph of articleParagraphs) {
 `string text ${expression} string text`
 ```
 ```javascript
-var person = 'Mike'
-var age = 28
+let person = 'Mike'
+let age = 28
 
 myTag = (strings, personExp, ageExp) => {
-
-  var str0 = strings[0]
-  var str1 = strings[1]
-
-  var ageStr
-  if (ageExp > 60){
-    ageStr = 'old person'
-  } else {
-    ageStr = 'young person'
-  }
-
+  let str0 = strings[0]
+  let str1 = strings[1]
+  let ageStr
+  ageExp > 60
+    ? ageStr = 'old person'
+    : ageStr = 'young person'
   return str0 + personExp + str1 + ageStr
-
 }
 
-var output = myTag`that ${ person } is a ${ age }`
-
+let output = myTag`that ${ person } is a ${ age }`
 console.log(output)    // that Mike is a young person
 ```
 
@@ -694,20 +688,20 @@ class Compo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'React'
+      value: 'React',
     }
   }
 
   componentDidMount() {
-    this.timer = setTimeout(
-      () => this.setState({
-        value: 'five seconds later'
-    }), 5000)
+    this.timer = setTimeout(() =>
+      this.setState({
+        value: 'five seconds later',
+      }), 5000)
   }
 
   componentWillUnmount() {
     this.setState({
-      value: 'React'
+      value: 'React',
     })
   }
 
@@ -734,8 +728,8 @@ Methods with ```-did-``` are called right **after** something happens.
 - Mounting
 When a component is being created and inserted into the DOM:
 
-  - ```constructor()```is called ** before the component is mounted**. The constructor is the right place to initialize state.
-  - ```componentWillMount()```is called right before mount. ```*基本不会使用```
+  - ```constructor()```is called **before the component is mounted**. The constructor is the right place to initialize state.
+  - ```componentWillMount()```is called right before mount. ***基本不会使用**
   - ```render()```is always required. It requires ```this.props``` and ```this.state``` and return React Element(JSX) or String and Number or Portals or ```null``` or Booleans.
   - ```componentDidMount()```is called right after mount.
 
@@ -790,9 +784,11 @@ export default class Input extends Component {
 
 ```javascript
 class LogoCropper extends Component {
-
-  state = {
-    src: null,
+  constructor(props) {
+    super(props);
+    this.state = {
+      src: null,
+    }
   }
 
   componentDidMount() {
@@ -800,7 +796,7 @@ class LogoCropper extends Component {
     fileReader.onload = (e) => {
       const dataURL = e.target.result
       this.setState({
-        src: dataURL
+        src: dataURL,
       })
     }
 
@@ -996,9 +992,7 @@ removeItem = (array, action) => {
 updateObjectInArray = (array, action) => {
   return array.map( (item, index) => {
     // 保持原来的值
-    if(index !== action.index) {
-      return item
-    }
+    index !== action.index && return item
 
     // 返回更新的值
     return {
@@ -1027,7 +1021,7 @@ Official React bindings for [Redux](https://github.com/reduxjs/redux).
 一个jQuery扩展库，可以实现对网页的色彩控制，如：
 ```javascript
   $('#foo').animate({
-    backgroundColor: 'rgb(249,204,226)'
+    backgroundColor: 'rgb(249,204,226)',
   }, 2200);
 ```
 
