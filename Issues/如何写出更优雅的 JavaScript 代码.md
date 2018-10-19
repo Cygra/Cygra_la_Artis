@@ -41,7 +41,7 @@ getApplicationByAppId() {
 ```
 先 `let` 了一个 `currentApp`，然后去数组里找到 `id` 等于当前属性传进来的 `appId` 的那个 `application`，然后赋值给 `currentApp`。
 
-用自然语言捋一下就清楚了，是去 数组里*找*一个 `application`，自然是用 `Array.find()` 呀。而且，先声明成 `null`，后边再赋值的写法也不大好，之后不会再次赋值的变量，其声明和赋值分开会降低后期维护时代码的可读性。此外，常量用 `const` 语义清晰，对性能也有提升。因此，较为优雅的代码：
+用自然语言捋一下就清楚了，是去数组里*找*一个 `application`，自然是用`Array.find()` 呀。而且，先声明成 `null`，后边再赋值的写法也不大好。之后不会再次赋值的变量，其声明和赋值分开会降低后期维护时代码的可读性。此外，常量用 `const` 语义清晰，对性能也有提升。因此，较为优雅的代码：
 
 ```javascript
 // 根据 appId 拿到当前 application
