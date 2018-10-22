@@ -81,3 +81,13 @@ const getUrl = site => url[site] || ''
 getUrl('react')
 // "https://reactjs.org/"
 ```
+
+---
+### 数组去重
+```javascript
+// 用 Set
+const uniqueArray = arr => [...new Set(arr)]
+
+// 不用 Set
+const uniqueArray = arr => arr.filter((v, i) => arr.indexOf(v) === i)
+```
