@@ -60,7 +60,7 @@ PATCH /addresses/1
 DELETE /addresses/1
 ```
 
-#### HTTP 状态码
+### HTTP 状态码
 
 HTTP 状态码表明了 HTTP 请求的状态。
 - 1XX - 消息
@@ -69,6 +69,6 @@ HTTP 状态码表明了 HTTP 请求的状态。
 - 4XX - 客户端错误
 - 5XX - 服务端错误
 
-#### 媒体类型
+### 媒体类型
 
 `Accept` 和 `Content-Type` HTTP 头可用于描述 HTTP 请求中发送或请求的内容。如果客户端在 JSON 中请求响应，则可以将 `Accept` 设置为 `application/json`。相反，在发送数据时，将 `Content-Type` 设置为 `application/xml` 会告诉客户端请求中发送的数据是 XML。
