@@ -159,3 +159,32 @@ typeof b
 const c
 // Uncaught SyntaxError: Missing initializer in const declaration
 ```
+
+---
+定义一个函数 `f`：
+```javascript
+f(1)(2)() // 3
+f(1)(4)(6)() // 11
+```
+
+```javascript
+const f = a => {
+  if (a === undefined) {
+    return 0
+  } else {
+    return b => {
+      if (b === undefined) {
+        return b
+      } else {
+        return f(a + b)
+      }
+    }
+  }
+}
+```
+
+or 
+
+```javascript
+const f = a => a === undefined ? 0 : b => b === undefined ? a : f(a + b)
+```
