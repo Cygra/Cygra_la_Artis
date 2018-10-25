@@ -174,7 +174,7 @@ const f = a => {
   } else {
     return b => {
       if (b === undefined) {
-        return b
+        return a
       } else {
         return f(a + b)
       }
