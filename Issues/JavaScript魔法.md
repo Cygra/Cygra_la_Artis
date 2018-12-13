@@ -209,3 +209,20 @@ var target = [
 
 longestIndex(masterArray) // 2
 ```
+
+---
+
+```javascript
+for(i=9,a='';++i<36;)a+=i.toString(36)
+// "abcdefghijklmnopqrstuvwxyz"
+```
+
+```javascript
+[...Array(26)].map(_=>(++i).toString(36).toUpperCase(),i=9).join``
+// "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+```
+
+```javascript
+String.fromCharCode(...Array(123).keys()).slice(97)
+// "abcdefghijklmnopqrstuvwxyz"
+```
