@@ -188,3 +188,24 @@ or
 ```javascript
 const f = a => a === undefined ? 0 : b => b === undefined ? a : f(a + b)
 ```
+
+---
+寻找最长的数组的方法。
+https://stackoverflow.com/questions/33577266/how-to-find-longest-array-in-an-array-of-arrays-in-javascript
+
+```javascript
+var longestIndex = arr => arr.reduce(
+      (prev, current, index, arr) =>
+        arr[prev].length > current.length ? prev : index,
+      0
+    )
+    
+var target = [ 
+    [1,2,3,4,5],
+    [1,2], 
+    [1,1,1,1,2,2,2,2,4,4],
+    [1,2,3,4,5],
+  ];
+
+longestIndex(masterArray) // 2
+```
