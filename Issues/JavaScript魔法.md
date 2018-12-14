@@ -226,3 +226,14 @@ for(i=9,a='';++i<36;)a+=i.toString(36)
 String.fromCharCode(...Array(123).keys()).slice(97)
 // "abcdefghijklmnopqrstuvwxyz"
 ```
+
+```ruby
+# ruby version
+(10...36).map{ |i| i.to_s 36}.join()
+# or
+('a'..'z').to_a.join()
+
+->
+"abcdefghijklmnopqrstuvwxyz"
+```
+
