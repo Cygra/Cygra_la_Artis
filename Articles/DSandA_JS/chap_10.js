@@ -3,6 +3,7 @@
 class Node {
   constructor(data, left, right) {
     this.data = data
+    this.count = 1
     this.left = left
     this.right = right
   }
@@ -83,7 +84,7 @@ class BST {
     let current = this.root
     while (current !== null) {
       if (current.data === data) {
-        return(current)
+        return current
       } else if (current.data < data) {
         current = current.right
       } else {
@@ -127,6 +128,12 @@ class BST {
       return node
     }
   }
+
+  update(data) {
+    let grade = this.find(data)
+    grade.count ++
+    return grade
+  }
 }
 
 let nums = new BST()
@@ -143,3 +150,29 @@ nums.insert(32)
 console.log(nums.getMin())
 console.log(nums.getMax())
 console.log(nums.find(76))
+
+function geneArr() {
+  let arr = []
+  for (let i = 0; i < 200; i ++) {
+    arr.push(Math.floor(Math.random() * 100))
+  }
+  return arr
+}
+
+let grades = geneArr()
+console.log(grades)
+
+let gradeTree = new BST()
+grades.forEach(function(i) {
+  let grade = gradeTree.find(i)
+  if (grade === null) {
+    gradeTree.insert(i)
+  } else {
+    gradeTree.update(i)
+  }
+})
+
+Array.from(new Set(grades)).forEach(function(i) {
+  let g = gradeTree.find(i)
+  g && console.log(g.data + '  ' + g.count)
+})
