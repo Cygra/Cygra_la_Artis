@@ -9,6 +9,7 @@ class Node {
 class LList {
   constructor() {
     this.head = new Node("head")
+    this.head.next = this.head
   }
 
   find(item) {
@@ -37,7 +38,7 @@ class LList {
 
   findLast() {
     var currentNode = this.head
-    while (currentNode.next !== null) {
+    while (currentNode.next.element !== "head") {
       currentNode = currentNode.next
     }
     return currentNode
@@ -45,11 +46,11 @@ class LList {
 
   remove(item) {
     let currentNode = this.find(item)
-    if (currentNode.next !== null) {
+    if (currentNode.next.element !== "head") {
       currentNode.prev.next = currentNode.next
       currentNode.next.prev = currentNode.prev
     } else {
-      currentNode.prev.next = null
+      currentNode.prev.next = this.head
     }
     currentNode.next = null
     currentNode.prev = null
@@ -57,7 +58,7 @@ class LList {
 
   display() {
     let currentNode = this.head
-    while (currentNode.next !== null) {
+    while (currentNode.next.element !== "head") {
       console.log(currentNode.next.element)
       currentNode = currentNode.next
     }
