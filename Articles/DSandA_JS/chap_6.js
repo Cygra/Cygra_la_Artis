@@ -2,6 +2,7 @@ class Node {
   constructor(element) {
     this.element = element
     this.next = null
+    this.prev = null
   }
 }
 
@@ -22,20 +23,36 @@ class LList {
     let newNode = new Node(newEle)
     let currentNode = this.find(item)
     newNode.next = currentNode.next
+    newNode.prev = currentNode
     currentNode.next = newNode
   }
 
-  findPrev(item) {
-    let currentNode = this.head
-    while (currentNode.next !== null && currentNode.next.element !== item) {
+  // findPrev(item) {
+  //   let currentNode = this.head
+  //   while (currentNode.next !== null && currentNode.next.element !== item) {
+  //     currentNode = currentNode.next
+  //   }
+  //   return currentNode
+  // }
+
+  findLast() {
+    var currentNode = this.head
+    while (currentNode.next !== null) {
       currentNode = currentNode.next
     }
     return currentNode
   }
 
   remove(item) {
-    var prevNode = this.findPrev(item)
-    prevNode.next !== null && (prevNode.next = prevNode.next.next)
+    let currentNode = this.find(item)
+    if (currentNode.next !== null) {
+      currentNode.prev.next = currentNode.next
+      currentNode.next.prev = currentNode.prev
+    } else {
+      currentNode.prev.next = null
+    }
+    currentNode.next = null
+    currentNode.prev = null
   }
 
   display() {
@@ -43,6 +60,14 @@ class LList {
     while (currentNode.next !== null) {
       console.log(currentNode.next.element)
       currentNode = currentNode.next
+    }
+  }
+
+  disReverse() {
+    let currentNode = this.findLast()
+    while (currentNode.prev !== null) {
+      console.log(currentNode.element)
+      currentNode = currentNode.prev
     }
   }
 }
@@ -55,3 +80,4 @@ cities.insert("Conway4", "Conway3")
 cities.display()
 cities.remove("Conway3")
 cities.display()
+cities.disReverse()
