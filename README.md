@@ -6,4 +6,4 @@ Cygra la artis.
 
 笔记与博文主要整理在 👆`Issues` 区。
 
-可进 `Issue` 区查看，也可进 `./Issues` 文件夹直接看 `.md` 文档。
+可进 `Issue` 区查看，也可进 `./main` 文件夹直接看 `.md` 文档。
