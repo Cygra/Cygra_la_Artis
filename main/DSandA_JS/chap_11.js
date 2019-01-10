@@ -38,13 +38,27 @@ class Graph {
       !this.marked[i] && this.dfs(i)
     });
   }
+
+  // 广度优先
+  bfs(v) {
+    let queue = []
+    this.marked[v] = true
+    queue.push(v)
+    while (queue.length > 0) {
+      let qs = queue.shift()
+      this.adj[qs] !== undefined && console.log(`[${qs}] visited`)
+      this.adj[qs].forEach(i => {
+        !this.marked[i] && (this.marked[i] = true) && queue.push(i)
+      })
+    }
+  }
 }
 
 var g = new Graph(5)
-g.addEdge(0, 1)
+g.addEdge(0, 3)
 g.addEdge(0, 2)
 g.addEdge(1, 3)
 g.addEdge(2, 4)
 g.showGraph()
-g.dfs(0)
+g.bfs(0)
 console.log(g)
