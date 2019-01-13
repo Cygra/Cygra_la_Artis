@@ -8,8 +8,9 @@ class Vertex {
 class Graph {
   constructor(v) {
     this.vertices = v
+    this.verList = []
     this.edges = 0
-    this.adj = [...new Array(v)].map(i => [])
+    this.adj = [...new Array(v)].map(() => [])
     this.marked = Array(v).fill(false)
     this.edgeTo = []
   }
@@ -28,6 +29,22 @@ class Graph {
         point !== undefined && console.log(point)
       }
       console.log('\n')
+    }
+  }
+
+  showName() {
+    let visited = []
+    for (let i = 0; i < this.vertices; i ++) {
+      console.log(this.verList[i] + '- >')
+      visited.push(this.verList[i])
+      for (let j = 0; j < this.verList[j]; j ++) {
+        if (this.adj[i][j] !== undefined) {
+          if (visited.indexOf(this.verList[j] < 0)) {
+            console.log(this.verList[j] + '  ')
+          }
+        }
+      }
+      visited.pop()
     }
   }
 
@@ -76,16 +93,43 @@ class Graph {
   hasPathTo(v) {
     return this.marked[v]
   }
+
+  topSort() {
+    let stack = []
+    let visited = Array(this.vertices).fill(false)
+    for (let i = 0; i < this.vertices; i ++) {
+      !visited[i] && this.topSortHelper(i, visited, stack)
+    }
+    for (let i = 0; i < stack.length; i ++) {
+      if (stack[i] !== undefined && stack[i] !== false) {
+        console.log(this.verList[stack[i]])
+      }
+    }
+  }
+
+  topSortHelper(v, visited, stack) {
+    visited[v] = true
+    this.adj[v].forEach(i => {
+      !visited[i] && this.topSortHelper(i, visited, stack)
+    })
+    stack.push(v)
+  }
 }
 
-var g = new Graph(5)
+var g = new Graph(6)
 g.addEdge(0, 1)
-g.addEdge(1, 2)
-g.addEdge(2, 3)
-g.addEdge(3, 4)
-g.addEdge(1, 4)
-g.bfs(0)
-console.log(g)
+g.addEdge(0, 2)
+g.addEdge(1, 3)
+g.addEdge(3, 5)
+g.addEdge(2, 4)
+g.verList = [
+  "cs1",
+  "cs2",
+  "data structure",
+  "asssembly lang",
+  "operating sys",
+  "alg",
+]
 
-let paths = g.pathTo(4)
-console.log(paths)
+g.topSort()
+g.showName()
