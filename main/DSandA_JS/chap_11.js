@@ -11,6 +11,7 @@ class Graph {
     this.edges = 0
     this.adj = [...new Array(v)].map(i => [])
     this.marked = Array(v).fill(false)
+    this.edgeTo = []
   }
 
   addEdge(v, w) {
@@ -46,19 +47,45 @@ class Graph {
     queue.push(v)
     while (queue.length > 0) {
       let qs = queue.shift()
+      console.log(`qs${qs}`)
       this.adj[qs] !== undefined && console.log(`[${qs}] visited`)
       this.adj[qs].forEach(i => {
-        !this.marked[i] && (this.marked[i] = true) && queue.push(i)
+        if (!this.marked[i]) {
+          this.marked[i] = true
+          queue.push(i)
+          console.log(`i${i}`)
+          this.edgeTo[i] = qs
+        }
       })
     }
+  }
+
+  pathTo(v) {
+    let source = 0
+    if (!this.hasPathTo(v)) {
+      return undefined
+    }
+    let path = []
+    for (let i = v; i !== source; i = this.edgeTo[i]) {
+      path.push(i)
+    }
+    path.push(source)
+    return path
+  }
+
+  hasPathTo(v) {
+    return this.marked[v]
   }
 }
 
 var g = new Graph(5)
-g.addEdge(0, 3)
-g.addEdge(0, 2)
-g.addEdge(1, 3)
-g.addEdge(2, 4)
-g.showGraph()
+g.addEdge(0, 1)
+g.addEdge(1, 2)
+g.addEdge(2, 3)
+g.addEdge(3, 4)
+g.addEdge(1, 4)
 g.bfs(0)
 console.log(g)
+
+let paths = g.pathTo(4)
+console.log(paths)
