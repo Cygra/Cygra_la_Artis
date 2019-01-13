@@ -32,6 +32,35 @@ class CArray {
       this.toString()
     }
   }
+
+  selectionSort() {
+    let len = this.dataStore.length
+    let min
+    for (let outer = 0; outer < len; outer ++) {
+      min = outer
+      for (let inner = outer + 1; inner < len; inner ++) {
+        this.dataStore[inner] < this.dataStore[min] && (min = inner)
+      }
+      swap(this.dataStore, outer, min)
+      this.toString()
+    }
+  }
+
+  insertSort() {
+    let temp
+    let inner
+    let len = this.dataStore.length
+    for (let outer = 1; outer < len; outer ++) {
+      temp = this.dataStore[outer]
+      inner = outer
+      while (inner > 0 && this.dataStore[inner - 1] >= temp) {
+        this.dataStore[inner] = this.dataStore[inner - 1]
+        inner --
+      }
+      this.dataStore[inner] = temp
+      this.toString()
+    }
+  }
 }
 
 function swap(arr, index1, index2) {
@@ -42,4 +71,5 @@ function swap(arr, index1, index2) {
 
 let nums = new CArray(10)
 nums.setData()
-nums.bubbleSort()
+nums.insertSort()
+nums.toString()
