@@ -3,6 +3,7 @@ class CArray {
     this.dataStore = [...new Array(num)].map(i => i)
     this.pos = 0
     this.num = num
+    this.gaps = [5, 3, 1]
   }
 
   setData() {
@@ -61,6 +62,18 @@ class CArray {
       this.toString()
     }
   }
+
+  shellSort() {
+    for (let g = 0; g < this.gaps.length; g ++) {
+      for (let i = this.gaps[g]; i < this.dataStore.length; i ++) {
+        let temp = this.dataStore[i]
+        for (var j = i; j >= this.gaps[g] && this.dataStore[j - this.gaps[g]] > temp; j -= this.gaps[g]) {
+          this.dataStore[j] = this.dataStore[j - this.gaps[g]]
+        }
+        this.dataStore[j] = temp
+      }
+    }
+  }
 }
 
 function swap(arr, index1, index2) {
@@ -71,5 +84,6 @@ function swap(arr, index1, index2) {
 
 let nums = new CArray(10)
 nums.setData()
-nums.insertSort()
+nums.toString()
+nums.shellSort()
 nums.toString()
