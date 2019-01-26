@@ -237,3 +237,15 @@ String.fromCharCode(...Array(123).keys()).slice(97)
 "abcdefghijklmnopqrstuvwxyz"
 ```
 
+---
+
+```javascript
+const nestedArr = [1, 2, [3, 4, [5, 6]]];
+const flatten = arr => 
+  arr.reduce(
+    (flat, next) => flat.concat(Array.isArray(next) ? flatten(next) : next),
+    []
+  );
+```
+
+把数组打平
