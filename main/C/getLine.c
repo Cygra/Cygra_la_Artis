@@ -12,8 +12,9 @@ int main() {
   int found = 0;
 
   while (getLine(line, MAXLINE) > 0) {
-    if (stringIndex(line, pattern) >= 0) {
-      printf("%s", line);
+    int postion = stringIndex(line, pattern);
+    if (postion >= 0) {
+      printf("\n %s at %d \n", line, postion);
       found ++;
     }
   };
