@@ -1,4 +1,4 @@
-// cat getline | ./a.out
+// cat sampleText | ./a.out
 #include <stdio.h>
 #define MAXLINE 100
 
