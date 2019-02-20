@@ -10,10 +10,10 @@ void reverse(char s[]) {
   }
 }
 
-int main() {
-  char s[6] = "clang";
-  printf("%s \n", s);
-  reverse(s);
-  printf("%s \n", s);
-  return 0;
-}
+// int main() {
+//   char s[6] = "clang";
+//   printf("%s \n", s);
+//   reverse(s);
+//   printf("%s \n", s);
+//   return 0;
+// }
