@@ -249,3 +249,40 @@ const flatten = arr =>
 ```
 
 把数组打平
+
+---
+
+```javascript
+var i;
+
+for (i = 0; i < 10; i++) { 
+  setTimeout(() => console.log(i), 1000); 
+}
+// 10
+// 10
+// 10
+// 10
+// 10
+// 10
+// 10
+// 10
+// 10
+// 10
+```
+```javascript
+var i;
+
+for (i = 0; i < 10; i++) {
+  (i => setTimeout(() => console.log(i), 1000))(i); 
+} 
+// 0
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
+```
