@@ -45,3 +45,7 @@ Fiber reimplements the reconciler. It is not principally concerned with renderin
 受控组件和非受控组件 https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 
 https://github.com/semlinker/reactjs-interview-questions
+
+<pre>
+  {JSON.stringify({name: 'John', age: 42}, null, 2)}
+</pre>
