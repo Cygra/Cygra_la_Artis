@@ -43,3 +43,5 @@ This separation means that React DOM and React Native can use their own renderer
 Fiber reimplements the reconciler. It is not principally concerned with rendering, though renderers will need to change to support (and take advantage of) the new architecture.
 
 受控组件和非受控组件 https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
+
+https://github.com/semlinker/reactjs-interview-questions
