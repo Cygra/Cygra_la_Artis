@@ -49,3 +49,5 @@ https://github.com/semlinker/reactjs-interview-questions
 <pre>
   {JSON.stringify({name: 'John', age: 42}, null, 2)}
 </pre>
+
+const [all, year, month, day] = /^(\d\d\d\d)-(\d\d)-(\d\d)$/.exec('2999-12-31');
