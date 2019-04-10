@@ -1,3 +1,5 @@
+https://leftstick.github.io/js-interview-online/#/exam1
+
 ```javascript
 /**
  *  要求，尝试完成如下功能：
