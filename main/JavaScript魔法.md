@@ -286,3 +286,11 @@ for (i = 0; i < 10; i++) {
 // 8
 // 9
 ```
+
+排序 & 不区分大小写
+
+---
+
+```javascript
+["Foo", "bar"].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+```
