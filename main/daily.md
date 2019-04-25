@@ -51,3 +51,5 @@ https://github.com/semlinker/reactjs-interview-questions
 </pre>
 
 const [all, year, month, day] = /^(\d\d\d\d)-(\d\d)-(\d\d)$/.exec('2999-12-31');
+
+函数的作用域基于函数创建的位置
