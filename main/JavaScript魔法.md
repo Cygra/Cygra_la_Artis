@@ -294,3 +294,23 @@ for (i = 0; i < 10; i++) {
 ```javascript
 ["Foo", "bar"].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 ```
+
+---
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.sayHello = function() {
+  return "hello, I am " + this.name;
+};
+
+var kevin = new Person("Kevin");
+
+kevin.__proto__.sayHello();
+// "hello, I am undefined"
+
+kevin.sayHello();
+// "hello, I am Kevin"
+```
