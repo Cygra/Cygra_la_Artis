@@ -313,4 +313,10 @@ kevin.__proto__.sayHello();
 
 kevin.sayHello();
 // "hello, I am Kevin"
+
+kevin.constructor === Person
+// true
+
+kevin.constructor === Person.prototype.constructor
+// true
 ```
