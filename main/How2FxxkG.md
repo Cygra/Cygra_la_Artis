@@ -1,4 +1,4 @@
-1. 去 [Vultr](#https://www.vultr.com/) 上买个服务器
+1.
 ```
 $5/month
 
@@ -8,7 +8,7 @@ Storage: 25 GB SSD
 Bandwidth: 1000 GB
 OS: Ubuntu 16.04 x64
 ```
-2. ssh连上去
+2. ssh
 3. ```$ apt-get update```
 4. ```$ apt-get install python-pip```
 5. ```$ pip install --upgrade pip```
