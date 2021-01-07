@@ -32,7 +32,7 @@ MDN 上对 `space-evenly` 属性的[定义](https://developer.mozilla.org/zh-CN/
 .container {
   display: flex;
   .child: {
-    flex: 1
+    flex: 1;
   }
 }
 ```
@@ -47,10 +47,10 @@ MDN 上对 `space-evenly` 属性的[定义](https://developer.mozilla.org/zh-CN/
 
 ```
 // space-evenly
-|-子-子-子-子-子-|
+|--子--子--子--子--子--|
 
 // space-between
-|子-子-子-子-子|
+|子--子--子--子--子|
 ```
 
 也就是说，`space-evenly` 会比 `space-between` 多了两边的两个空隙，而 `space-between` 的第一个和最后一个子元素是紧贴容器边缘的。
@@ -58,7 +58,7 @@ MDN 上对 `space-evenly` 属性的[定义](https://developer.mozilla.org/zh-CN/
 为了填补这个差异，我们可以用两个伪元素，来让容器在设定为 `space-between` 的时候，拥有七个子元素，也就拥有了「六个空隙」：
 
 ```
-|伪-子-子-子-子-子-伪|
+|伪--子--子--子--子--子--伪|
 ```
 
 代码：
